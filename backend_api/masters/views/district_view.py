@@ -14,6 +14,7 @@ from account import models as acc_models
 class DistrictList(generics.ListCreateAPIView):
     queryset = master_models.District.objects.all().order_by('-id')
     serializer_class =  master_serializers.DistrictSerializer
+   
 
 
 class DistrictDetails(generics.RetrieveUpdateDestroyAPIView):
