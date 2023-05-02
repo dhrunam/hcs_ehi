@@ -5,22 +5,25 @@
             <form #login="ngForm" (ngSubmit)="onLogin(login)">
                 <div class="inputs">
                     <p>
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field appearance="outline">
                             <mat-label>Username</mat-label>
                             <input matInput name="username" ngModel #username="ngModel" required>
                             <mat-error *ngIf="username.touched && username.invalid">Please enter username</mat-error>
                         </mat-form-field>
                     </p>
                     <p>
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field appearance="outline">
                             <mat-label>Password</mat-label>
-                            <input matInput name="password" ngModel #password="ngModel" required>
+                            <input matInput [type]="hide ? 'password' : 'text'" name="password" ngModel #password="ngModel" required>
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon [color]="password.touched && password.invalid ? 'accent' : 'primary'">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
                             <mat-error *ngIf="password.touched && password.invalid">Please enter password</mat-error>
                         </mat-form-field>
                     </p>
                 </div>
                 <p>
-                    <button type="submit" mat-raised-button color="primary">
+                    <button class="submit" type="submit" mat-raised-button color="primary">
                         Login
                     </button>
                 </p>

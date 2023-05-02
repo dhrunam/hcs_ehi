@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  hide: boolean = true;
   constructor(private authService: AuthService,private router: Router){}
   onLogin(data: NgForm){
     if(!data.valid){

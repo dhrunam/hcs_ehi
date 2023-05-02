@@ -6,9 +6,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard/home', pathMatch: 'full'},
   { path: '', component: DashboardComponent,
     children: [
-      { path: 'home', loadComponent: () => import('./home/home.component').then(c => c.HomeComponent)}
+      { path: 'home', loadComponent: () => import('./home/home.component').then(c => c.HomeComponent) },
+      { path: 'masters', loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule) },
     ]
-  }
+  },
 ];
 
 @NgModule({

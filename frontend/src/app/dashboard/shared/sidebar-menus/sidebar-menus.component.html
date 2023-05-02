@@ -1,14 +1,29 @@
-<ul>
-    <li routerLink="/dashboard/home" routerLinkActive="active">
-        <mat-label>
-            <mat-icon>dashboard</mat-icon>
-            <span>Dashboard</span>
-        </mat-label>
+<ul class="menu">
+    <li class="menu-item i" routerLink="/dashboard/home" routerLinkActive="active">
+        <div class="icon-links">
+            <mat-label>
+                <mat-icon>dashboard</mat-icon>
+                <span>Dashboard</span>
+            </mat-label>
+        </div>
     </li>
-    <li>
-        <mat-label>
-            <mat-icon>space_dashboard</mat-icon>
-            <span>District</span>
-        </mat-label>
+    <li class="menu-item" (click)="onSubMenuToggle(elem1,elem2)">
+        <div class="icon-links">
+            <mat-label>
+                <mat-icon>space_dashboard</mat-icon>
+                <span>Masters</span>
+            </mat-label>
+            <div class="icon" #elem1>
+                <mat-icon>keyboard_arrow_up</mat-icon>
+            </div>
+        </div>
+        <ul class="sub-menu" #elem2>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/district" routerLinkActive="active">
+                <mat-label>
+                    <mat-icon>domain</mat-icon>
+                    <span>District</span>
+                </mat-label>
+            </li>
+        </ul>
     </li>
 </ul>

@@ -3,19 +3,49 @@ ul{
     width: 84%;
 }
 li{
+    position: relative;
     margin-left: -38px;
     margin-top: 8px;
     padding: 0.8rem;
-    display: flex;
-    justify-content: space-between;
-    user-select: none;
     transition: all 0.3s ease;
     cursor: pointer;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    user-select: none;
 }
-li:hover,
-li.active{
+.sub-menu{
+    background-color: #F9F9F9;
+    margin-top: 1rem;
+    width: 100%;
+    margin-left: -28px;
+    max-height: 0;
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+.sub-menu.active{
+    max-height: 100vh;
+    transition: all 1s ease;
+}
+.sub-menu .sub-menu-item{
+    margin-top: -3px;
+    margin-left: -130px;
+    border-radius: 20px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+.icon-links{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon-links mat-icon{
+    transition: all 0.3s ease;
+}
+.i:hover,
+.i.active,
+.sub-menu .sub-menu-item:hover,
+.sub-menu .sub-menu-item.active{
     background-color: #F2F4FF;
     color: #3f51b5;
 }
@@ -30,4 +60,7 @@ mat-label mat-icon{
 }
 mat-label span{
     font-size: 18px;
+}
+.icon.active mat-icon{
+    rotate: 180deg;
 }
