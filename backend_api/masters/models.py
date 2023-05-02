@@ -6,7 +6,7 @@ class District(models.Model):
     name=models.CharField(max_length=128, null=False)
 
     def __str__(self) -> str:
-        return super().__str__()
+        return str(self.id)
 
 class Organisation(models.Model):
     district=models.ForeignKey(District,null=True, on_delete=models.SET_NULL, related_name='organisation_district')
@@ -15,13 +15,13 @@ class Organisation(models.Model):
     hierarchy=models.IntegerField()
 
     def __str__(self) -> str:
-        return super().__str__()
+            return str(self.id)
 
 class EmployeeGroup(models.Model):
     name=models.CharField(max_length=128, null=False)
     
     def __str__(self) -> str:
-        return super().__str__()
+        return str(self.id)
 
 class Designation(models.Model):
     emp_group = models.ForeignKey(EmployeeGroup, null=True, on_delete=models.SET_NULL)
@@ -29,13 +29,13 @@ class Designation(models.Model):
     hierarchy=models.IntegerField()
 
     def __str__(self) -> str:
-        return super().__str__()
+        return str(self.id)
 
 class BloodGroup(models.Model):
     name=models.CharField(max_length=128, null=False)
     
     def __str__(self) -> str:
-        return super().__str__()
+        return str(self.id)
     
 class Employee(models.Model):
     emp_id = models.CharField(max_length=20, null=False)
