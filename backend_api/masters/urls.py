@@ -9,7 +9,10 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('masters', masters_views.DistrictList.as_view()),
-    path('masters/<int:pk>', masters_views.DistrictDetails.as_view()),
+    path('masters/district', masters_views.DistrictList.as_view()),
+    path('masters/district/<int:pk>', masters_views.DistrictDetails.as_view()),
+
+    path('masters/organisation', masters_views.OrganisationList.as_view()),
+    path('masters/organisation/<int:pk>', masters_views.OrganisatiionDetails.as_view()),
 ]
 
