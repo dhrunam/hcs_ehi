@@ -36,3 +36,23 @@ class BloodGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = masters_models.BloodGroup
         fields = ('id', 'name')
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    related_designation = DesignationSerializer(source='designation', read_only=True)
+    related_organisation = OrganisationSerializer(source = 'organisation', read_only=True)
+    class Meta:
+        model = masters_models.Employee
+        fields =  ('id',
+                   'emp_id',
+                    'designation',
+                    'organisation',
+                    'name',
+                    'blood_group',
+                    'residenntial_address',
+                    'date_of_birth',
+                    'date_of_joining',
+                    'date_of_superannuation',
+                    'related_designation',
+                    'related_organisation',
+                     )
+
