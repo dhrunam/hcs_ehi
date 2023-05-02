@@ -25,7 +25,7 @@ mat-error{
     margin-top: 5px;
     margin-left: -10px;
 }
-button{
+.submit{
     margin-top: 1rem;
 }
 @media(max-width: 1261px){

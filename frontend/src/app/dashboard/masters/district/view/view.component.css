@@ -1,0 +1,15 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+table{
+    margin-top: 2rem;
+    width: 100%;
+}
+.mat-column-name{
+    width: 50%;
+}
+.mat-column-operation{
+    width: 20%;
+}
