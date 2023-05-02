@@ -6,7 +6,7 @@ from django.contrib.auth.models import User,Group
 
 
 class DistrictSerializer(serializers.ModelSerializer):
-
+  
 
     class Meta:
         model = masters_models.District

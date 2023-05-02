@@ -1,0 +1,18 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav [mode]="mobile ? 'over' : 'side'" [(opened)]="toggle">
+        <img src="assets/images/hcs_logo.png" height="120">
+        <mat-divider></mat-divider>
+        <app-sidebar-menus></app-sidebar-menus>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <header>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="toggle = !toggle">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </header>
+        <main class="body">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+

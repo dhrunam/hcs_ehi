@@ -1,0 +1,30 @@
+<section>
+    <mat-card>
+        <mat-card-content>
+            <img src="assets/images/hcs_logo.png" height="150">
+            <form #login="ngForm" (ngSubmit)="onLogin(login)">
+                <div class="inputs">
+                    <p>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Username</mat-label>
+                            <input matInput name="username" ngModel #username="ngModel" required>
+                            <mat-error *ngIf="username.touched && username.invalid">Please enter username</mat-error>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput name="password" ngModel #password="ngModel" required>
+                            <mat-error *ngIf="password.touched && password.invalid">Please enter password</mat-error>
+                        </mat-form-field>
+                    </p>
+                </div>
+                <p>
+                    <button type="submit" mat-raised-button color="primary">
+                        Login
+                    </button>
+                </p>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section>
