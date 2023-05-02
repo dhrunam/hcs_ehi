@@ -1,1 +1,1 @@
-from views.user_registration_view import *
+from account.views.user_registration_view import *

@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from durin import urls as durin_urls
 from masters import urls as master_urls
+from account import urls as acc_urls
 
 urlpatterns = [
     
     path('api/', include(master_urls)),
+    path('api/', include(acc_urls)),
     path('api/' , include(durin_urls)),
     path('admin/', admin.site.urls),
 
