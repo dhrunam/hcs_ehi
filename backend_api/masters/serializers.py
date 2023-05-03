@@ -32,10 +32,10 @@ class EmployeeTypeSerializer(serializers.ModelSerializer):
         fields =( 'id','type')
 
 class DesignationSerializer(serializers.ModelSerializer):
-
+    related_emp_group= EmployeeGroupSerializer(source='emp_group', read_only=True)
     class Meta:
         model = masters_models.Designation
-        fields = ('id','emp_group', 'name', 'hierarchy')
+        fields = ('id','emp_group', 'name', 'hierarchy','related_emp_group')
 
 class BloodGroupSerializer(serializers.ModelSerializer):
 
