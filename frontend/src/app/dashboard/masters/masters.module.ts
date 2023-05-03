@@ -6,6 +6,7 @@ const routes: Routes = [
   {path: 'designation', loadChildren:() => import('./designation/designation.module').then(m=>m.DesignationModule)},
   { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
   { path: 'employee-type', loadChildren: () => import('./employee-type/employee-type.module').then(m => m.EmployeeTypeModule) },
+  { path: 'empgroup', loadChildren: () => import('./empgroup/empgroup.module').then(m => m.EmpgroupModule) },
 ]
 @NgModule({
   declarations: [],
