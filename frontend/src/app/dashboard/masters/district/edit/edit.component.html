@@ -5,7 +5,7 @@
         <div class="content">
             <mat-label>District:</mat-label>
             <mat-form-field appearance="fill">
-                <input matInput placeholder="Placeholder" name="name" [ngModel]="district_name" #name="ngModel" required>
+                <input matInput placeholder="Enter District Name" name="name" [ngModel]="district_name" #name="ngModel" required>
                 <mat-error>Please enter district name</mat-error>
             </mat-form-field>
             <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
