@@ -4,9 +4,6 @@ import { URL } from "src/environment/environment";
 @Injectable({providedIn: 'root'})
 export class EmployeeService{
     constructor(private http: HttpClient) {}
-    get_designations(){
-        return this.http.get<any>(`${URL}/masters/designation`);
-    }
     get_organisations(){
         return this.http.get<any>(`${URL}/masters/organisation`);
     }

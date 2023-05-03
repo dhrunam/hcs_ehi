@@ -6,6 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Employee } from '../employee.model';
 import { Observable, take } from 'rxjs';
 import { EmployeeTypeService } from '../../employee-type/employee-type.service';
+import { DesignationService } from '../../designation/designation.service';
 
 @Component({
   selector: 'app-edit',
@@ -21,7 +22,11 @@ export class EditComponent {
   date_of_superannuation: any;
   employee!: Employee;
   editMode: boolean = false;
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private router: Router, private employeeTypeService: EmployeeTypeService){}
+  constructor(private employeeService: EmployeeService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private employeeTypeService: EmployeeTypeService,
+    private designationService: DesignationService){}
   ngOnInit(): void{
     this.getDesignation();
     this.getBloodGroups();
@@ -81,7 +86,7 @@ export class EditComponent {
     this.date_of_superannuation = this.lastDayOfMonth;
   }
   getDesignation(){
-    this.employeeService.get_designations().subscribe({
+    this.designationService.get_designations().subscribe({
       next: data => this.designations = data.results,
     })
   }
