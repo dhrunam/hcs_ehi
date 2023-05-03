@@ -12,17 +12,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-<<<<<<< HEAD
-import {MatListModule} from '@angular/material/list';
-import {MatSelectModule} from '@angular/material/select';
-
-
-=======
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
->>>>>>> 1a25eb427f6d15fd5c48f6489e484ac5cdf6db80
 @NgModule({
   declarations: [],
   imports: [
@@ -39,13 +32,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatTooltipModule,
     MatDialogModule,
-<<<<<<< HEAD
-    MatListModule,
-=======
     MatDatepickerModule,
     MatNativeDateModule,
     MomentDateModule,
->>>>>>> 1a25eb427f6d15fd5c48f6489e484ac5cdf6db80
     MatSelectModule,
   ],
   exports: [
@@ -62,13 +51,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatTooltipModule,
     MatDialogModule,
-<<<<<<< HEAD
-    MatListModule,
-=======
     MatDatepickerModule,
     MatNativeDateModule,
     MomentDateModule,
->>>>>>> 1a25eb427f6d15fd5c48f6489e484ac5cdf6db80
     MatSelectModule,
   ]
 })

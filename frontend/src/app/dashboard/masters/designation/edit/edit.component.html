@@ -1,29 +1,37 @@
-<section>
+
     <h3>{{ editMode ? 'Edit Designation' : 'Add Designation'}}</h3>
     <mat-divider></mat-divider>
-    <form #designation="ngForm" (ngSubmit)="onSubmit(designation)">
-        <div class="content">
-            <mat-label>Designation:</mat-label>
-            <mat-form-field appearance="fill">
-                <input matInput placeholder="Enter Designation" name="name"
-                 [ngModel]="designation_name" #name="ngModel" required>
-                <mat-error>Please enter designantion name</mat-error>
-            </mat-form-field>
-            <mat-label>Emp. Group</mat-label>
-            <mat-select [ngModel]="selected_emp_group" name="emp_group" #name="ngModel" required="">
-                <mat-option *ngFor="let group of emp_data_source" [value]="group.id">
-                    {{group.name}}
-                </mat-option>
-            </mat-select>
+    <main>
+        <form #designation="ngForm" (ngSubmit)="onSubmit(designation)">
+            <div class="row">
     
-            <mat-label>Hierarchy</mat-label>
-            <mat-form-field>
-                 <input matInput placeholder="Enter Hierarchy" name="hierarchy"  type="number" [ngModel]="hierarchy" #name="ngModel">
-            </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Designation:</mat-label>
+                    <input matInput placeholder="Enter Designation" name="name"
+                     [ngModel]="designation_name" #name="ngModel" required>
+                    <mat-error>Please enter designantion name</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Emp. Group</mat-label>
+                    <mat-select [ngModel]="selected_emp_group" name="emp_group" #name="ngModel" required="">
+                        <mat-option *ngFor="let group of emp_data_source" [value]="group.id">
+                            {{group.name}}
+                        </mat-option>
+                    </mat-select>
+        
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Hierarchy</mat-label>
 
+                        <input matInput placeholder="Enter Hierarchy" name="hierarchy"  type="number" [ngModel]="hierarchy" #name="ngModel">
+
+                </mat-form-field>
+    
+            </div>
             <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
-        
-        
-        </div>
-    </form>
-</section>
+        </form>
+    </main>
+
+
