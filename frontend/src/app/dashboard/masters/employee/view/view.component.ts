@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Employee } from '../employee.model';
+import { EmployeeService } from '../employee.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view',
@@ -7,24 +9,30 @@ import { Employee } from '../employee.model';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
-  employees: Employee[] = [
-    {
-      id: 1,
-      employee_name: 'Test User',
-      employee_address: 'Test Address',
-      employee_organization: 'Test Organization',
-      employe_date_of_superannuation: 'Test Date',
-      employee_blood_group: 'Test',
-      employee_date_of_birth: 'Test Date',
-      employee_date_of_entry_in_service: 'Test Date',
-      employee_designation: 'Test Designation',
-      employee_group: 'Test Group',
-      employee_id: 'Test ID',
-    }
-  ];
+  employees: Employee[] = [];
   displayedColumns = ['sno','emp_name','emp_id','emp_org','operations'];
-
-  onDeleteEmployee(){
-    confirm('Are you sure you want to delete employee ?');
+  constructor(private employeeSerivce: EmployeeService,private _snackBar: MatSnackBar){}
+  ngOnInit(): void{
+    this.getEmployees();
+  }
+  openSnackBar() {
+    this._snackBar.open('Employee Deleted', 'Dismiss');
+  }
+  onDeleteEmployee(id:number){
+    if(confirm('Are you sure you want to delete this employee ?')){
+      this.employeeSerivce.delete_employee(id).subscribe({
+        next: data => {
+          this.getEmployees();
+          this.openSnackBar();
+        }
+      })
+    }
+  }
+  getEmployees(){
+    this.employeeSerivce.get_employees().subscribe({
+      next: data => {
+        this.employees = data.results;
+      }
+    })
   }
 }

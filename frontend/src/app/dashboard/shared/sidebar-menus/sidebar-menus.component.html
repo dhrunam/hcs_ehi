@@ -13,11 +13,11 @@
                 <mat-icon>space_dashboard</mat-icon>
                 <span>Masters</span>
             </mat-label>
-            <div class="icon" #elem1>
+            <div class="icon" #elem1 [ngClass]="{'active': toggleKey === 'masters'}">
                 <mat-icon>keyboard_arrow_up</mat-icon>
             </div>
         </div>
-        <ul class="sub-menu" #elem2>
+        <ul class="sub-menu" #elem2 [ngClass]="{'active': toggleKey === 'masters'}">
             <li class="sub-menu-item" routerLink="/dashboard/masters/district" routerLinkActive="active">
                 <label>
                     <mat-icon>domain</mat-icon>
@@ -28,6 +28,12 @@
                 <label>
                     <mat-icon>person</mat-icon>
                     <span>Employee</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/employee-type" routerLinkActive="active">
+                <label>
+                    <mat-icon>person</mat-icon>
+                    <span>Employee Type</span>
                 </label>
             </li>
         </ul>

@@ -22,6 +22,12 @@ class EmployeeGroup(models.Model):
     
     def __str__(self) -> str:
         return str(self.id)
+    
+class EmployeeType(models.Model):
+    type=models.CharField(max_length=128, null=False)
+    
+    def __str__(self) -> str:
+        return str(self.id)
 
 class Designation(models.Model):
     emp_group = models.ForeignKey(EmployeeGroup, null=True, on_delete=models.SET_NULL)
@@ -47,4 +53,5 @@ class Employee(models.Model):
     date_of_birth = models.DateField(auto_created=False, auto_now= False)
     date_of_joining = models.DateField(auto_created=False, auto_now=False)
     date_of_superannuation = models.DateField(auto_created=False, auto_now= False)
+    type = models.CharField(max_length=20, null= True, default='')
     

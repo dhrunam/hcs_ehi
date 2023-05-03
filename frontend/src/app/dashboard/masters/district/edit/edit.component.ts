@@ -1,9 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DistrictService } from '../district.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -45,7 +44,7 @@ export class EditComponent {
       else{
         observable = this.districtService.add_district(fd);
       }
-      observable.subscribe({
+      observable.pipe(take(1)).subscribe({
         next: data => {
           this.router.navigate(['/dashboard/masters/district']);
         }
