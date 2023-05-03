@@ -5,13 +5,13 @@ ul{
 li{
     position: relative;
     margin-left: -38px;
-    margin-top: 8px;
-    padding: 0.8rem;
     transition: all 0.3s ease;
     cursor: pointer;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     user-select: none;
+    margin-top: 8px;
+    padding: 0.8rem;
 }
 .sub-menu{
     background-color: #F9F9F9;
@@ -29,7 +29,7 @@ li{
 }
 .sub-menu .sub-menu-item{
     margin-top: -3px;
-    margin-left: -130px;
+    /* margin-left: -130px; */
     border-radius: 20px;
     border-top-right-radius: 18px;
     border-bottom-right-radius: 18px;
@@ -38,6 +38,12 @@ li{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 20px;
 }
 .icon-links mat-icon{
     transition: all 0.3s ease;
@@ -55,7 +61,9 @@ mat-label{
     align-items: center;
 }
 mat-label span,
-mat-label mat-icon{
+mat-label mat-icon,
+label span,
+label mat-icon{
     margin-left: 1rem;
 }
 mat-label span{
