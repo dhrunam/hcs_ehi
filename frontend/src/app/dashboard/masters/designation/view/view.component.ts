@@ -11,25 +11,20 @@ export interface ViewDesignation{
  emp_group: number;
  name: string;
  hierarchy: number;
- related_emp_group : RelatedEmpGroup
-
+ related_emp_group : RelatedEmpGroup;
 }
-
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
-  
   displayedColumns: string[] = ['sno','name','emp_group','hierarchy', 'id'];
   dataSource: Array<ViewDesignation> = [];
   constructor(private designationService: DesignationService,private _snackBar: MatSnackBar){}
-
   ngOnInit(): void{
     this.getDesignation();
   }
-
   getDesignation()
   {
     this.designationService.get_designations().subscribe({
@@ -40,7 +35,6 @@ export class ViewComponent {
       }
     })
   }
-
   onDeleteDesignation(id: number)
   {
     if(confirm('Are you sure you want to delete district ?')){
@@ -52,7 +46,6 @@ export class ViewComponent {
       })
     }
   }
-
   openSnackBar()
   {
     this._snackBar.open('Designation Deleted', 'Dismiss');
