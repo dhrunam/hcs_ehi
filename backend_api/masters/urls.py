@@ -27,5 +27,10 @@ urlpatterns = [
     path('masters/employee', masters_views.EmployeeList.as_view()),
     path('masters/employee/<int:pk>', masters_views.EmployeeDetails.as_view()),
 
+    path('masters/section', masters_views.SectionList.as_view()),
+    path('masters/section/<int:pk>', masters_views.SectionDetails.as_view()),
+
+
+
 ]
 
