@@ -53,7 +53,7 @@ class Employee(models.Model):
     date_of_birth = models.DateField(auto_created=False, auto_now= False)
     date_of_joining = models.DateField(auto_created=False, auto_now=False)
     date_of_superannuation = models.DateField(auto_created=False, auto_now= False)
-<<<<<<< HEAD
+    type = models.CharField(max_length=20, null= True, default='')
 
 class Section(models.Model):
     name = models.CharField(max_length=50, null=False)
@@ -62,7 +62,18 @@ class Section(models.Model):
     def __str__(self) -> str:
         return str(self.name)
 
-=======
-    type = models.CharField(max_length=20, null= True, default='')
->>>>>>> 21c2e6331c22834de2fc6f675a7636f16fc8cf92
-    
+
+
+class MedicalTestProfile(models.Model):
+    name = models.CharField(max_length=128, null=False, blank=False)
+
+
+class MedicalTest(models.Model):
+    profile=models.ForeignKey(MedicalTestProfile, null=True, on_delete=models.SET_NULL, related_name='medical_test')
+    name = models.CharField(max_length=256)
+    normal_min_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    normal_max_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    unit = models.CharField(max_length=10, blank=True, default='')
+
+
+

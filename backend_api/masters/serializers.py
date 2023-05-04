@@ -75,3 +75,48 @@ class SectionSerializer(serializers.ModelSerializer):
         return rep
       
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class MedicalTestProfileSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = masters_models.MedicalTestProfile
+        fields = (
+            'id',
+            'name'
+        )
+
+
+class MedicalTestSerializer(serializers.ModelSerializer):
+    related_profile=MedicalTestProfileSerializer(source='profile', read_only=True)
+
+    class Meta:
+        model = masters_models.MedicalTest
+        fields = (
+            'id',
+            'profile',
+            'name',
+            'normal_min_value',
+            'normal_max_value',
+            'unit',
+            'related_profile'
+
+        )
+
+
+
+

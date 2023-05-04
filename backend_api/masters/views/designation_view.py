@@ -21,3 +21,8 @@ class DesignationDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.Designation
     serializer_class =  master_serializers.DesignationSerializer
 
+class DesignationListWithoutPagination(generics.ListCreateAPIView):
+    queryset = master_models.Designation.objects.all().order_by('-id')
+    serializer_class =  master_serializers.DesignationSerializer
+    pagination_class = None
+   
