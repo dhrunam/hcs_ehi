@@ -63,3 +63,60 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'type',
                      )
 
+class SectionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = masters_models.Section
+        fields = ('id', 'name', 'organisation')
+
+    def to_representation(self, instance):
+        rep = super(SectionSerializer, self).to_representation(instance)
+        rep['organisation'] = instance.organisation.name
+        return rep
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class MedicalTestProfileSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = masters_models.MedicalTestProfile
+        fields = (
+            'id',
+            'name'
+        )
+
+
+class MedicalTestSerializer(serializers.ModelSerializer):
+    related_profile=MedicalTestProfileSerializer(source='profile', read_only=True)
+
+    class Meta:
+        model = masters_models.MedicalTest
+        fields = (
+            'id',
+            'profile',
+            'name',
+            'normal_min_value',
+            'normal_max_value',
+            'unit',
+            'related_profile'
+
+        )
+
+
+
+

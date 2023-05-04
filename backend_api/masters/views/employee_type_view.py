@@ -18,3 +18,8 @@ class EmployeeTypeList(generics.ListCreateAPIView):
 class EmployeeTypeDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.EmployeeType
     serializer_class =  master_serializers.EmployeeTypeSerializer
+
+class EmployeeTypeListWithoutPagination(generics.ListAPIView):
+    queryset = master_models.EmployeeType.objects.all().order_by('-id')
+    serializer_class =  master_serializers.EmployeeTypeSerializer
+    pagination_class = None
