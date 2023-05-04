@@ -1,72 +1,66 @@
-<h3>Add Employee</h3>
+<h3>{{editMode ? 'Edit Employee': 'Add Employee'}}</h3>
 <mat-divider></mat-divider>
 <main>
     <form #emp="ngForm" (ngSubmit)="onSubmit(emp)">
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Name of the Employee</mat-label>
-                <input matInput type="text" name="emp_name" ngModel #emp_name="ngModel" required>
+                <input matInput type="text" name="emp_name" [ngModel]="employee.name" #emp_name="ngModel" required>
                 <!-- <mat-error *ngIf="emp_name.touched && emp_name.invalid">Please enter Name</mat-error> -->
             </mat-form-field>
             <mat-form-field class="middle-part" appearance="outline">
                 <mat-label>Select Designation</mat-label>
-                <mat-select name="emp_desg" ngModel #emp_desg="ngModel" required>
-                  <mat-option value="one">First option</mat-option>
-                  <mat-option value="two">Second option</mat-option>
+                <mat-select name="emp_desg" [ngModel]="employee.designation"  #emp_desg="ngModel" required>
+                  <mat-option *ngFor="let d of designations" [value]="d.id">{{d.name}}</mat-option>
                 </mat-select>
                 <!-- <mat-error *ngIf="emp_desg.touched && emp_desg.invalid">Please select Designation</mat-error> -->
             </mat-form-field>
             <mat-form-field appearance="outline">
+                <mat-label>Select Organization</mat-label>
+                <mat-select name="emp_org" [ngModel]="employee.organisation"  #emp_org="ngModel" required>
+                  <mat-option *ngFor="let o of organisations" [value]="o.id">{{ o.name }}</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="emp_org.touched && emp_org.invalid">Please select Organization</mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Employee ID</mat-label>
+                <input matInput type="text" name="emp_id" [ngModel]="employee.emp_id" #emp_id="ngModel" required>
+                <!-- <mat-error *ngIf="emp_id.touched && emp_id.invalid">Please enter Employee ID</mat-error> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Date of Birth</mat-label>
-                <input matInput [matDatepicker]="picker1" name="emp_dob" ngModel #emp_dob="ngModel" required>
+                <input matInput (dateInput)="onAddSuperannuation($event)" [matDatepicker]="picker1" name="emp_dob" [ngModel]="employee.date_of_birth" #emp_dob="ngModel" required>
                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <!-- <mat-error *ngIf="emp_dob.touched && emp_dob.invalid">Please select Date of Birth</mat-error> -->
             </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Select Organization</mat-label>
-                <mat-select name="emp_org" ngModel #emp_org="ngModel" required>
-                  <mat-option value="one">First option</mat-option>
-                  <mat-option value="two">Second option</mat-option>
-                </mat-select>
-                <!-- <mat-error *ngIf="emp_org.touched && emp_org.invalid">Please select Organization</mat-error> -->
-            </mat-form-field>
-            <mat-form-field class="middle-part" appearance="outline">
-                <mat-label>Select Employee Group</mat-label>
-                <mat-select name="emp_group" ngModel #emp_group="ngModel" required>
-                  <mat-option value="one">First option</mat-option>
-                  <mat-option value="two">Second option</mat-option>
-                </mat-select>
-                <!-- <mat-error *ngIf="emp_group.touched && emp_group.invalid">Please select Employee Group</mat-error> -->
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Employee ID</mat-label>
-                <input matInput type="text" name="emp_id" ngModel #emp_id="ngModel" required>
-                <!-- <mat-error *ngIf="emp_id.touched && emp_id.invalid">Please enter Employee ID</mat-error> -->
-            </mat-form-field>
-        </div>
-        <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Date of Entry in Service</mat-label>
-                <input matInput [matDatepicker]="picker2" name="emp_does" ngModel #emp_does="ngModel" required>
+                <input matInput [matDatepicker]="picker2" name="emp_does" [ngModel]="employee.date_of_joining" #emp_does="ngModel" required>
                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
                 <!-- <mat-error *ngIf="emp_does.touched && emp_does.invalid">Please select Date of Entry in Service</mat-error> -->
             </mat-form-field>
+        </div>
+        <div class="row">
             <mat-form-field class="middle-part" appearance="outline">
                 <mat-label>Date of Superannuation</mat-label>
-                <input matInput [matDatepicker]="picker3" name="emp_dos" ngModel #emp_dos="ngModel" required>
-                <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
+                <input readonly matInput name="emp_dos" [ngModel]="date_of_superannuation | date: 'dd/MM/YYYY'" #emp_dos="ngModel" required>
                 <!-- <mat-error *ngIf="emp_dos.touched && emp_dos.invalid">Please select Date of Superannuation</mat-error> -->
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Select Blood Group</mat-label>
-                <mat-select name="emp_bgroup" ngModel #emp_bgroup="ngModel" required>
-                  <mat-option value="one">First option</mat-option>
-                  <mat-option value="two">Second option</mat-option>
+                <mat-select name="emp_bgroup" [ngModel]="employee.blood_group" #emp_bgroup="ngModel" required>
+                  <mat-option *ngFor="let b of bloodgroups" [value]="b.name">{{b.name}}</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="emp_bgroup.touched && emp_bgroup.invalid">Please select Blood Group</mat-error> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Select Employee Type</mat-label>
+                <mat-select name="emp_type" [ngModel]="employee.type" #emp_type="ngModel" required>
+                  <mat-option *ngFor="let e of employeeTypes" [value]="e.type">{{e.type}}</mat-option>
                 </mat-select>
                 <!-- <mat-error *ngIf="emp_bgroup.touched && emp_bgroup.invalid">Please select Blood Group</mat-error> -->
             </mat-form-field>
@@ -74,7 +68,7 @@
         <div class="row">
             <mat-form-field class="textarea" appearance="outline">
                 <mat-label>Address</mat-label>
-                <textarea matInput rows="3" name="emp_add" ngModel #emp_add="ngModel" required></textarea>
+                <textarea matInput rows="3" name="emp_add" [ngModel]="employee.residenntial_address" #emp_add="ngModel" required></textarea>
                 <!-- <mat-error *ngIf="emp_add.touched && emp_add.invalid">Please enter Address</mat-error> -->
             </mat-form-field>
         </div>

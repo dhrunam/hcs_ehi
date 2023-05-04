@@ -27,10 +27,15 @@ urlpatterns = [
     path('masters/employee', masters_views.EmployeeList.as_view()),
     path('masters/employee/<int:pk>', masters_views.EmployeeDetails.as_view()),
 
+<<<<<<< HEAD
     path('masters/section', masters_views.SectionList.as_view()),
     path('masters/section/<int:pk>', masters_views.SectionDetails.as_view()),
 
 
+=======
+    path('masters/employee_type', masters_views.EmployeeTypeList.as_view()),
+    path('masters/employee_type/<int:pk>', masters_views.EmployeeTypeDetails.as_view()),
+>>>>>>> 21c2e6331c22834de2fc6f675a7636f16fc8cf92
 
 ]
 

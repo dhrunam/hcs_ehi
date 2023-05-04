@@ -25,6 +25,12 @@ class EmployeeGroupSerializer(serializers.ModelSerializer):
         model = masters_models.EmployeeGroup
         fields =( 'id','name')
 
+class EmployeeTypeSerializer(serializers.ModelSerializer):
+  
+    class Meta:
+        model = masters_models.EmployeeType
+        fields =( 'id','type')
+
 class DesignationSerializer(serializers.ModelSerializer):
     related_emp_group= EmployeeGroupSerializer(source='emp_group', read_only=True)
     class Meta:
@@ -54,6 +60,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'date_of_superannuation',
                     'related_designation',
                     'related_organisation',
+                    'type',
                      )
 
 class SectionSerializer(serializers.ModelSerializer):

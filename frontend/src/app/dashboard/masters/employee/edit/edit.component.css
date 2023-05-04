@@ -1,13 +1,12 @@
 main{
-    padding-left: 8rem;
-    padding-right: 8rem;
+    padding-left: 20rem;
+    padding-right: 20rem;
     margin-top: 2rem;
 }
 .row{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
 }
 mat-form-field{
     width: 100%;

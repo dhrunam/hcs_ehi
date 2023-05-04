@@ -5,7 +5,12 @@ const routes: Routes = [
   { path: 'district', loadChildren: () => import('./district/district.module').then(m => m.DistrictModule ) },
   {path: 'designation', loadChildren:() => import('./designation/designation.module').then(m=>m.DesignationModule)},
   { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
+<<<<<<< HEAD
   { path: 'section', loadChildren: () => import('./section/section.module').then(m => m.SectionModule) },
+=======
+  { path: 'employee-type', loadChildren: () => import('./employee-type/employee-type.module').then(m => m.EmployeeTypeModule) },
+  { path: 'empgroup', loadChildren: () => import('./empgroup/empgroup.module').then(m => m.EmpgroupModule) },
+>>>>>>> 21c2e6331c22834de2fc6f675a7636f16fc8cf92
 ]
 @NgModule({
   declarations: [],
