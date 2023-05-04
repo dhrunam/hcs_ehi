@@ -21,3 +21,8 @@ class OrganisatiionDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.Organisation
     serializer_class =  master_serializers.OrganisationSerializer
 
+class OrganisationListWithoutPagination(generics.ListCreateAPIView):
+    queryset = master_models.Organisation.objects.all().order_by('-id')
+    serializer_class =  master_serializers.OrganisationSerializer
+    pagination_class = None
+   
