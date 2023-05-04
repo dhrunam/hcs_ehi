@@ -13,10 +13,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class EditComponent {
   section_name: string = '';
   organisation: number = 0;
+  organisationlist: Array< { id:number, name : string}> = []
   id:number = 0;
   editMode: boolean = false;
   constructor(private sectionService: SectionService, private route: ActivatedRoute, private router: Router){}
   ngOnInit(): void{
+    this.get_organisation();
     this.route.params.subscribe({
       next: (param: Params) => {
         this.editMode = param['id'] != null;
@@ -26,7 +28,6 @@ export class EditComponent {
             next: data => {
               this.section_name = data.name;
               this.organisation = data.organisation
-
             }
           })
         }
@@ -34,6 +35,7 @@ export class EditComponent {
     })
   }
   onSubmit(data: NgForm){
+    console.log(data);
     let observable: Observable<any>;
     if(!data.valid){
       data.control.markAllAsTouched();
@@ -41,11 +43,14 @@ export class EditComponent {
     else{
       let fd = new FormData();
       fd.append('name', data.value.name);
+      fd.append('organisation', data.value.organisation);
+      
       if(this.editMode){
         fd.append('id', this.id.toString());
         observable = this.sectionService.update_section(fd);
       }
       else{
+        
         observable = this.sectionService.add_section(fd);
       }
       observable.subscribe({
@@ -55,4 +60,13 @@ export class EditComponent {
       })
     }
   }
+
+  get_organisation(){
+    this.sectionService.get_organisations().subscribe({
+      next: data => {
+       this.organisationlist = data.results;
+      }
+    })
+  }
 }
+
