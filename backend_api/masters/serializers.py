@@ -63,6 +63,17 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'type',
                      )
 
+class SectionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = masters_models.Section
+        fields = ('id', 'name', 'organisation')
+
+    def to_representation(self, instance):
+        rep = super(SectionSerializer, self).to_representation(instance)
+        rep['organisation'] = instance.organisation.name
+        return rep
+      
 
 
 

@@ -15,7 +15,7 @@ class Organisation(models.Model):
     hierarchy=models.IntegerField()
 
     def __str__(self) -> str:
-            return str(self.id)
+            return str(self.name)
 
 class EmployeeGroup(models.Model):
     name=models.CharField(max_length=128, null=False)
@@ -55,6 +55,14 @@ class Employee(models.Model):
     date_of_superannuation = models.DateField(auto_created=False, auto_now= False)
     type = models.CharField(max_length=20, null= True, default='')
 
+class Section(models.Model):
+    name = models.CharField(max_length=50, null=False)
+    organisation=models.ForeignKey(Organisation,null=True, on_delete=models.SET_NULL, related_name='section_organisation')
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
 
 class MedicalTestProfile(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
@@ -69,6 +77,3 @@ class MedicalTest(models.Model):
 
 
 
-
-
-    
