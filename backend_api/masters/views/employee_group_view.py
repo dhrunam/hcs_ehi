@@ -15,8 +15,6 @@ class EmployeeGroupList(generics.ListCreateAPIView):
     queryset = master_models.EmployeeGroup.objects.all().order_by('-id')
     serializer_class =  master_serializers.EmployeeGroupSerializer
    
-
-
 class EmployeeGroupDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.EmployeeGroup
     serializer_class =  master_serializers.EmployeeGroupSerializer

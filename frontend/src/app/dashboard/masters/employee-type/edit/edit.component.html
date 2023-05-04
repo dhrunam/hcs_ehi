@@ -1,0 +1,12 @@
+<h3>{{editMode ? 'Update Employee Type' : 'Add Employee Type'}}</h3>
+<mat-divider></mat-divider>
+<form #district="ngForm" (ngSubmit)="onSubmit(district)">
+    <div class="content">
+        <mat-label>Employee Type:</mat-label>
+        <mat-form-field appearance="fill">
+            <input matInput placeholder="Enter Employee Type" name="type" [ngModel]="employee_type_name" #type="ngModel" required>
+            <mat-error>Please enter employee type</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
+    </div>
+</form>

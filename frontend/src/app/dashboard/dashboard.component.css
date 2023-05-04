@@ -6,7 +6,11 @@ mat-sidenav{
 }
 header{
     height: 60px;
+    background-color: #fafafa;
+}
+main{
     background-color: #fff;
+    min-height: 100vh;
 }
 mat-icon{
     font-size: 2rem;

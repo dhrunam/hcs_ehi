@@ -17,10 +17,7 @@ export class EditComponent {
   hierarchy:number=0;
   emp_data_source: Array<{id: number, name:string}> = [];
   id:number = 0;
-  constructor( private designationService: DesignationService, 
-    private route: ActivatedRoute,
-    private router: Router
-    ){}
+  constructor( private designationService: DesignationService, private route: ActivatedRoute,private router: Router){}
 
   ngOnInit(): void{
     this.getEmpGroups();
@@ -34,7 +31,6 @@ export class EditComponent {
               this.designation_name = data.name;
               this.hierarchy= data.hierarchy;
               this.selected_emp_group=data.emp_group
-              console.log(this.hierarchy)
             }
           })
         }
@@ -54,7 +50,6 @@ export class EditComponent {
       fd.append('emp_group', data.value.emp_group)
       if(this.editMode){
         fd.append('id', this.id.toString());
-
         observable = this.designationService.update_designation(fd);
       }
       else{
@@ -67,15 +62,12 @@ export class EditComponent {
       })
     }
   }
-
   getEmpGroups(){
     this.designationService.get_emp_group().subscribe({
       next: data => {
-        console.log(data.results);
         this.emp_data_source=data.results;
         
       }
     })
   }
-  
 }
