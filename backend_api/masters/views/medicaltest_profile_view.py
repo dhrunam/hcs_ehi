@@ -13,7 +13,7 @@ class MedicalTestProfileDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = master_serializers.MedicalTestProfileSerializer
 
 
-class MedicalTestProfileListWithoutPagination(generics.ListCreateAPIView):
+class MedicalTestProfileListWithoutPagination(generics.ListAPIView):
 
     queryset= master_model.MedicalTestProfile.objects.all().order_by('-id')
     serializer_class= master_serializers.MedicalTestProfileSerializer

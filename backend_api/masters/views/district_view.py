@@ -22,7 +22,7 @@ class DistrictDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.District
     serializer_class =  master_serializers.DistrictSerializer
 
-class DistrictListWithoutPagination(generics.ListCreateAPIView):
+class DistrictListWithoutPagination(generics.ListAPIView):
     queryset = master_models.District.objects.all().order_by('-id')
     serializer_class =  master_serializers.DistrictSerializer
     pagination_class = None
