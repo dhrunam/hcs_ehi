@@ -9,6 +9,10 @@
             <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="toggle = !toggle">
                 <mat-icon>menu</mat-icon>
             </button>
+            <button class="beforeMenu" mat-button [matMenuTriggerFor]="beforeMenu"><mat-label class="user"><span>User</span><mat-icon>keyboard_arrow_down</mat-icon></mat-label></button>
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+            </mat-menu>
         </header>
         <main class="body">
             <router-outlet></router-outlet>

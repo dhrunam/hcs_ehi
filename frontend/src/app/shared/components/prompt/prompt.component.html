@@ -1,0 +1,16 @@
+<div class="backdrop" (click)="onSubmit(false)"></div>
+<mat-card>
+    <header>
+        <button mat-icon-button color="primary" (click)="onSubmit(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-label>Are you sure you want to delete {{message}} ?</mat-label>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <footer>
+        <button mat-raised-button color="warn" (click)="onSubmit(true)">Delete</button>
+    </footer>
+</mat-card>
