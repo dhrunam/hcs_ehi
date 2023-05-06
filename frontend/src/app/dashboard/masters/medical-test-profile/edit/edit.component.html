@@ -1,0 +1,14 @@
+<section>
+    <h3>{{ editMode ? 'Edit Medical Test Profile' : 'Add Medical Test Profile'}}</h3>
+    <mat-divider></mat-divider>
+    <form #profile="ngForm" (ngSubmit)="onSubmit(profile)">
+        <div class="content">
+            <mat-label>Medical Test Profile:</mat-label>
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Enter Profile Name" name="name" [ngModel]="profile_name" #name="ngModel" required>
+                <mat-error>Please enter medical test profile</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
+        </div>
+    </form>
+</section>
