@@ -4,6 +4,10 @@ from masters import models as masters_models
 # from axes.admin import AccessLog
 from django.contrib.auth.models import User,Group
 
+class HelperOrganisationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = masters_models.Organisation
+        fields =( 'id','name')
 
 class DistrictSerializer(serializers.ModelSerializer):
   
@@ -64,10 +68,11 @@ class EmployeeSerializer(serializers.ModelSerializer):
                      )
 
 class SectionSerializer(serializers.ModelSerializer):
+    related_organisation = HelperOrganisationSerializer(source = 'organisation', read_only=True)
     
     class Meta:
         model = masters_models.Section
-        fields = ('id', 'name', 'organisation')
+        fields = ('id', 'name', 'organisation', 'related_organisation')
 
     def to_representation(self, instance):
         rep = super(SectionSerializer, self).to_representation(instance)
