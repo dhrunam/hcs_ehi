@@ -23,8 +23,16 @@
                     </p>
                 </div>
                 <p>
+                    <app-error-alert *ngIf="error" [message]="error"></app-error-alert>
+                </p>
+                <p>
                     <button class="submit" type="submit" mat-raised-button color="primary">
-                        Login
+                        <mat-label *ngIf="showLoader; else login_text">
+                            <mat-spinner diameter="20"></mat-spinner><span>Loading</span>
+                        </mat-label>
+                        <ng-template #login_text>
+                            Login
+                        </ng-template>
                     </button>
                 </p>
             </form>

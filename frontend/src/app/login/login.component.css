@@ -28,6 +28,17 @@ mat-error{
 .submit{
     margin-top: 1rem;
 }
+.submit mat-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit mat-label mat-spinner::ng-deep circle{
+    stroke: white !important;
+}
+.submit mat-label span{
+    margin-left: 1rem;
+}
 @media(max-width: 1261px){
     mat-card{
         width: 30%;

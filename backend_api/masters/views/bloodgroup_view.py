@@ -20,3 +20,9 @@ class BloodGroupList(generics.ListCreateAPIView):
 class BloodGroupDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.BloodGroup
     serializer_class =  master_serializers.BloodGroupSerializer
+
+class BloodGroupListWtioutPagination(generics.ListAPIView):
+    queryset = master_models.BloodGroup.objects.all().order_by('-id')
+    serializer_class =  master_serializers.BloodGroupSerializer
+    pagination_class = None
+   

@@ -6,6 +6,7 @@ import { EditComponent } from './edit/edit.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -27,6 +28,7 @@ export const MY_DATE_FORMATS = {
     MaterialModule,
     EmployeeRoutingModule,
     FormsModule,
+    SharedModule,
   ],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }

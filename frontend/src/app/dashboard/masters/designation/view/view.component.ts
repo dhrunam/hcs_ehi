@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DesignationService } from '../designation.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { promptAnimation } from 'src/app/shared/animations/prompt.animation';
 
 export interface RelatedEmpGroup{
   id: number;
@@ -16,9 +17,15 @@ export interface ViewDesignation{
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  styleUrls: ['./view.component.css'],
+  animations: [
+    promptAnimation
+  ]
 })
 export class ViewComponent {
+  showPrompt: boolean = false;
+  designation!: RelatedEmpGroup;
+  message: string = '';
   displayedColumns: string[] = ['sno','name','emp_group','hierarchy', 'id'];
   dataSource: Array<ViewDesignation> = [];
   constructor(private designationService: DesignationService,private _snackBar: MatSnackBar){}
@@ -29,25 +36,33 @@ export class ViewComponent {
   {
     this.designationService.get_designations().subscribe({
       next: data => {
-        console.log(data.results);
         this.dataSource=data.results;
-        console.log(this.dataSource);
       }
     })
   }
-  onDeleteDesignation(id: number)
-  {
-    if(confirm('Are you sure you want to delete district ?')){
-      this.designationService.delete_designation(id).subscribe({
-        next: data => {
-          this.getDesignation();
-          this.openSnackBar();
-        }
-      })
+  openPrompt(id:number, name: string){
+    this.designation = { id: id, name: name};
+    this.showPrompt = true;
+    this.message = 'designation '+name;
+  }
+  closePrompt(data:{status: boolean}){
+    if(data.status){
+      this.deleteDesignation();
     }
+    this.showPrompt = false;
+  }
+  deleteDesignation(){
+    this.designationService.delete_designation(this.designation.id).subscribe({
+      next: data => {
+        this.getDesignation();
+        this.openSnackBar();
+      }
+    })
   }
   openSnackBar()
   {
-    this._snackBar.open('Designation Deleted', 'Dismiss');
+    this._snackBar.open('Designation Deleted', 'Dismiss', {
+      duration: 2000
+    });
   }
 }

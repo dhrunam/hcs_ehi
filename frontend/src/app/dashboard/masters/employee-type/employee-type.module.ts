@@ -5,6 +5,7 @@ import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     EmployeeTypeRoutingModule,
     FormsModule,
+    SharedModule,
   ]
 })
 export class EmployeeTypeModule { }

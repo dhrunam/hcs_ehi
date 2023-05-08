@@ -16,6 +16,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [],
   imports: [
@@ -36,6 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MomentDateModule,
     MatSelectModule,
+    MatMenuModule,
+    MatAutocompleteModule,
   ],
   exports: [
     CommonModule,
@@ -55,6 +59,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MomentDateModule,
     MatSelectModule,
+    MatMenuModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule { }
