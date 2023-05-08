@@ -1,0 +1,43 @@
+<h3>{{editMode ? 'Edit Employee': 'Add Employee'}}</h3>
+<mat-divider></mat-divider>
+<main>
+    <form #emp="ngForm" (ngSubmit)="onSubmit(emp)">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Test Name</mat-label>
+                <input matInput type="text" name="test_name" [ngModel]="medical_test.name" #test_name="ngModel" required>
+                <!-- <mat-error *ngIf="emp_name.touched && emp_name.invalid">Please enter Name</mat-error> -->
+            </mat-form-field>
+            <mat-form-field class="middle-part" appearance="outline">
+                <mat-label>Select Profiles</mat-label>
+                <mat-select name="test_profile" [ngModel]="medical_test.profile"  #test_profile="ngModel" required>
+                  <mat-option *ngFor="let d of medical_test_profiles" [value]="d.id">{{d.name}}</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="emp_desg.touched && emp_desg.invalid">Please select Designation</mat-error> -->
+            </mat-form-field>
+
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Normal min-value</mat-label>
+                <input matInput type="text" name="normal_min_value" [ngModel]="medical_test.normal_min_value" #normal_min_value="ngModel" required>
+               
+                <!-- <mat-error *ngIf="emp_org.touched && emp_org.invalid">Please select Organization</mat-error> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Normal max-value</mat-label>
+                <input matInput type="text" name="normal_max_value" [ngModel]="medical_test.normal_max_value" #normal_max_value="ngModel" required>
+               
+                <!-- <mat-error *ngIf="emp_org.touched && emp_org.invalid">Please select Organization</mat-error> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Unit</mat-label>
+                <input matInput type="text" name="unit" [ngModel]="medical_test.unit" #unit="ngModel" required>
+               
+                <!-- <mat-error *ngIf="emp_dob.touched && emp_dob.invalid">Please select Date of Birth</mat-error> -->
+            </mat-form-field>
+
+        </div>
+        <button mat-raised-button color="primary">Submit</button>
+    </form>
+</main>

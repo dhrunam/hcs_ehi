@@ -118,6 +118,7 @@ class MedicalTestSerializer(serializers.ModelSerializer):
             'normal_min_value',
             'normal_max_value',
             'unit',
+            'is_deleted',
             'related_profile'
 
         )
