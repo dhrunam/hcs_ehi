@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'section', loadChildren: () => import('./section/section.module').then(m => m.SectionModule) },
   { path: 'employee-type', loadChildren: () => import('./employee-type/employee-type.module').then(m => m.EmployeeTypeModule) },
   { path: 'empgroup', loadChildren: () => import('./empgroup/empgroup.module').then(m => m.EmpgroupModule) },
-  {path: 'medical-test-profile', loadChildren:()=> import('./medical-test-profile/medical-test-profile.module').then(m=>m.MedicalTestProfileModule)}
+  { path: 'medical-test-profile', loadChildren:()=> import('./medical-test-profile/medical-test-profile.module').then(m=>m.MedicalTestProfileModule) },
+  { path: 'organisation', loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule) },
 ]
 @NgModule({
   declarations: [

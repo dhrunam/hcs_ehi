@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { OrganisationsRoutingModule } from './organisations-routing.module';
+import { OrganisationsComponent } from './organisations.component';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
-import { SectionComponent } from './section.component';
-import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
-import { SectionRoutingModule } from './section-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
+    OrganisationsComponent,
     ViewComponent,
-    EditComponent,
-    SectionComponent
+    EditComponent
   ],
   imports: [
     MaterialModule,
-    SectionRoutingModule,
-    FormsModule,
+    OrganisationsRoutingModule,
     SharedModule,
+    FormsModule,
   ]
 })
-export class SectionModule { }
+export class OrganisationsModule { }

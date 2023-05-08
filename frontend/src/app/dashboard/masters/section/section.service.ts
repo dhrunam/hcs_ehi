@@ -25,8 +25,4 @@ export class SectionService{
     delete_section(id:number){
         return this.http.delete(`${URL}/masters/section/${id}`);
     }
-    get_organisations()
-    {
-        return this.http.get<any>(`${URL}/masters/organisation`)
-    }
 }

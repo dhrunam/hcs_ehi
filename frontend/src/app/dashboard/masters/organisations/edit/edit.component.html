@@ -1,0 +1,29 @@
+<h3>{{editMode ? 'Edit Organisation': 'Add Organisation'}}</h3>
+<mat-divider></mat-divider>
+<main>
+    <form #org="ngForm" (ngSubmit)="onSubmit(org)">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Organisation Name</mat-label>
+                <input matInput name="organisation_name" [ngModel]="organisation.name" #organisation_name="ngModel" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Hierarchy</mat-label>
+                <input matInput name="hierarchy" [ngModel]="organisation.hierarchy" #hierarchy="ngModel" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Select District</mat-label>
+                <mat-select name="district" [ngModel]="organisation.district" #district="ngModel" required>
+                    <mat-option *ngFor="let d of districts" [value]="d.id">{{d.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="text-area" appearance="outline">
+                <mat-label>Address</mat-label>
+                <textarea matInput rows="3" name="address" [ngModel]="organisation.address" #address="ngModel" required></textarea>
+            </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary">{{ editMode ? 'Update' : 'Submit'}}</button>
+    </form>
+</main>
