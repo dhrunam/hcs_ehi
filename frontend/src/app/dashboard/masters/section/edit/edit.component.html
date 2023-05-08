@@ -3,19 +3,17 @@
     <mat-divider></mat-divider>
     <form #section="ngForm" (ngSubmit)="onSubmit(section)">
         <div class="content">
-            <mat-form-field appearance="outline" >
+            <mat-form-field appearance="outline">
                 <mat-label> Section Name</mat-label>
                 <input matInput placeholder="Section Name" name="name" [ngModel]="section_name" #name="ngModel">
-              </mat-form-field>
-
-               <mat-form-field appearance="outline">
-                <mat-label> Organisation</mat-label>
-                <mat-select [ngModel]="organisation" name="organisation" #name="ngModel" required="">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> Select Organisation</mat-label>
+                <mat-select [ngModel]="organisation_id" name="organisation" #name="ngModel" required="">
                     <mat-option *ngFor="let item of organisationlist" [value]="item.id">
                        {{item.name}}
                     </mat-option>
                 </mat-select>
-    
             </mat-form-field> 
             <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
         </div>
