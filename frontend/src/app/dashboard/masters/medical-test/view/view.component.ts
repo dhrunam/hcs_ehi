@@ -15,57 +15,32 @@ export class ViewComponent {
   message: string='';
   showPrompt: boolean=false;
   medical_tests:Array<MedicalTest>=[]
-  
-  medical_test:{
-    id:number,
-    name:string
-  }={id:0,name:''}
-  displayedColumns=['sno','test_name','profile_name','test_min_value','test_max_value','operations']
+  displayedColumns=['sno','test_name','profile_name','test_min_value','test_max_value','operations', 'isdeleted']
 
-  constructor(private medicalTestService: MedicalTestService
-    ,private snackBar: MatSnackBar){}
-
-  
+  constructor(private medicalTestService: MedicalTestService,private snackBar: MatSnackBar){}
   ngOnInit(){
-    
     this.getMedicalTests();
-
-  }
-  openPrompt(id:number, name:string){
-    this.showPrompt = true;
-    this.medical_test = { id: id, name: name};
-    this.message = 'medical test: '+name;
   }
   openSnackBar() {
     this.snackBar.open('Employee Deleted', 'Dismiss', {
       duration: 2000
     });
   }
-  closePrompt(data: { status: boolean } ){
-    if(data.status){
-      this.deleteMedicalTest();  
-    }
-    this.showPrompt = false;
-  }
-
-  deleteMedicalTest(){
+  deleteMedicalTest(id:number, status: boolean){
     let fd=new FormData();
-    fd.append('id', this.medical_test.id.toString());
-    fd.append('is_deleted', 'True')
+    fd.append('id', id.toString());
+    fd.append('is_deleted', status ? 'False' : 'True');
     this.medicalTestService.delete_medical_test(fd).subscribe({
       next: data=>{
         this.getMedicalTests();
-        this.openSnackBar();
+        // this.openSnackBar();
       }
     });
   }
-
   getMedicalTests(){
-
     this.medicalTestService.get_medical_tests().subscribe({
       next: data=>{
         this.medical_tests=data.results;
-        console.log(this.medical_tests);
       }
     });
   }

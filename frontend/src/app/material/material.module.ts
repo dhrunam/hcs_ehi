@@ -18,6 +18,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 @NgModule({
   declarations: [],
   imports: [
@@ -40,6 +41,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSelectModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatSlideToggleModule,
   ],
   exports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MomentDateModule,
     MatSelectModule,
     MatMenuModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSlideToggleModule,
   ]
 })
 export class MaterialModule { }
