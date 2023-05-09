@@ -1,7 +1,7 @@
 <app-prompt [message]="message" *ngIf="showPrompt" (submit)="closePrompt($event)" [@enterAnimation]></app-prompt>
 <header>
-    <h3>Employee(s)</h3>
-    <button mat-raised-button color="primary" routerLink="/dashboard/masters/medical-test/add">Add Employee</button>
+    <h3>Medical Test(s)</h3>
+    <button mat-raised-button color="primary" routerLink="/dashboard/masters/medical-test/add">Add Medical Test</button>
 </header>
 <mat-divider></mat-divider>
 <h4 *ngIf="!medical_tests[0]">No Medical Test Added</h4>

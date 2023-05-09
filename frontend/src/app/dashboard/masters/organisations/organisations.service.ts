@@ -10,9 +10,8 @@ export interface Organisation{
 @Injectable({ providedIn: 'root' })
 export class OrganisationService{
     constructor(private http: HttpClient){}
-
     get_organisations(){
-        return this.http.get<any>(`${URL}/masters/organisation`);
+        return this.http.get<any>(`${URL}/masters/organisation/list`);
     }
     get_organisation(id:number){
         return this.http.get<any>(`${URL}/masters/organisation/${id}`);

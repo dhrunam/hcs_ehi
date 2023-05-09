@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { EmpgroupRoutingModule } from './empgroup-routing.module';
 import { FormsModule } from '@angular/forms';
 import { EmpgroupComponent } from './empgroup.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EmpgroupComponent } from './empgroup.component';
   imports: [
     MaterialModule,
     EmpgroupRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ]
 })
 export class EmpgroupModule { }
