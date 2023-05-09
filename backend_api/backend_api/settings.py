@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'durin',
     'account',
     'masters',
+    'configuration',
 ]
 
 MIDDLEWARE = [
