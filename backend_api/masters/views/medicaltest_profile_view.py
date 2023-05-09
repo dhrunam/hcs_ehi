@@ -12,6 +12,12 @@ class MedicalTestProfileDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_model.MedicalTestProfile
     serializer_class = master_serializers.MedicalTestProfileSerializer
 
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+    
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
+
 
 class MedicalTestProfileListWithoutPagination(generics.ListAPIView):
 
