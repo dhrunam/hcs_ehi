@@ -30,24 +30,16 @@
                     <span>Organisation</span>
                 </label>
             </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/section" routerLinkActive="active">
-                <label>
-                    <mat-icon>group_work</mat-icon>
-                    <span>Section</span>
-                </label>
-            </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/employee-type" routerLinkActive="active">
-            <li class="sub-menu-item" routerLink="/dashboard/masters/empgroup" routerLinkActive="active">
-                <label>
-                    <mat-icon>assignment_ind</mat-icon>
-                    <span>Emp Group</span>
-                </label>
-            </li>
-         
             <li class="sub-menu-item" routerLink="/dashboard/masters/section" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>meeting_room</mat-icon>
                     <span>Section</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/empgroup" routerLinkActive="active">
+                <label>
+                    <mat-icon>assignment_ind</mat-icon>
+                    <span>Employee Group</span>
                 </label>
             </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/employee-type" routerLinkActive="active" (click)="onToggleKey('masters')">
@@ -56,16 +48,16 @@
                     <span>Employee Type</span>
                 </label>
             </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/employee" routerLinkActive="active" (click)="onToggleKey('masters')">
-                <label>
-                    <mat-icon>person</mat-icon>
-                    <span>Employee</span>
-                </label>
-            </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/designation" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>card_membership</mat-icon>
                     <span>Designation</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/employee" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>person</mat-icon>
+                    <span>Employee</span>
                 </label>
             </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test-profile/view" routerLinkActive="active" (click)="onToggleKey('masters')">
@@ -74,15 +66,31 @@
                     <span>Test Profile</span>
                 </label>
             </li>
-
             <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test/view" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>fingerprint</mat-icon>
                     <span>Medical Test</span>
                 </label>
             </li>
-     
-            
+        </ul>
+    </li>
+    <li class="menu-item">
+        <div class="icon-links" (click)="onSubMenuToggle(elem3,elem4,'configurations')">
+            <mat-label>
+                <mat-icon>space_dashboard</mat-icon>
+                <span>Configurations</span>
+            </mat-label>
+            <div class="icon" #elem3 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
+                <mat-icon>keyboard_arrow_up</mat-icon>
+            </div>
+        </div>
+        <ul class="sub-menu" #elem4 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
+            <li class="sub-menu-item" routerLink="/dashboard/configurations/district" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>place</mat-icon>
+                    <span>District</span>
+                </label>
+            </li>
         </ul>
     </li>
 </ul>

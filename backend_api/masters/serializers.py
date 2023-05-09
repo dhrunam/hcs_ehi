@@ -74,13 +74,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
                      )
 
 class SectionSerializer(serializers.ModelSerializer):
-<<<<<<< HEAD
-    related_organisation = HelperOrganisationSerializer(source='organisation', read_only =True)
-
-    class Meta:
-        model = masters_models.Section
-        fields = ('id', 'name', 'organisation', 'related_organisation')
-=======
     related_organisation = HelperOrganisationSerializer(source = 'organisation', read_only=True)
     
     class Meta:
@@ -107,7 +100,6 @@ class SectionSerializer(serializers.ModelSerializer):
 
 
 
->>>>>>> d39fd0be9295d5eb66975e1cb759f5953bd64911
 
 class MedicalTestProfileSerializer(serializers.ModelSerializer):
 
