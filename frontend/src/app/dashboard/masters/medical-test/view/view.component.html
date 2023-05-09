@@ -31,13 +31,13 @@
         <td mat-cell *matCellDef="let element">
           <button mat-icon-button color="primary" matTooltip="Edit"
            [routerLink]="['/dashboard/masters/medical-test/edit', element.id]" matTooltipPosition="left">
-           <mat-icon>edit</mat-icon></button> / 
+           <mat-icon>edit</mat-icon></button>
         </td>
     </ng-container>
     <ng-container matColumnDef="isdeleted">
         <th mat-header-cell *matHeaderCellDef>Is Deleted</th>
         <td mat-cell *matCellDef="let element">
-          <mat-slide-toggle (click)="deleteMedicalTest(element.id, element.is_deleted)"></mat-slide-toggle>
+          <mat-slide-toggle (click)="deleteMedicalTest(element.id, element.is_deleted)" [checked]="!element.is_deleted" color="warn"></mat-slide-toggle>
         </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

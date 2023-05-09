@@ -20,7 +20,7 @@ export interface ViewMedicalTestProfile
 export class ViewComponent {
   medicalTestProfile!: ViewMedicalTestProfile
   dataSource: Array<any> = [];
-  displayedColumns: string[] =['sno','name', 'id'];
+  displayedColumns: string[] =['sno','name', 'id', 'isdeleted'];
   showPrompt: boolean = false;
   message: string = '';
   constructor(private medicalTestProfileservice:MedicalTestProfileService, 
@@ -30,50 +30,28 @@ export class ViewComponent {
     this.getMedicalTestProfiles()
   }
 
-  getMedicalTestProfiles()
-  {
+  getMedicalTestProfiles(){
     this.medicalTestProfileservice.get_medical_test_profiles().subscribe({
       next: data=>{
-        console.log(data);
         this.dataSource=data.results;
       }
     });
   }
-
-  closePrompt(data: {status: boolean}){
-    if(data.status){
-      this.deleteMedicalTestProfile();
-    }
-    this.showPrompt = false;
-  }
-
-  openPrompt(id:number, name:string){
-    this.medicalTestProfile = { id: id, name: name};
-    this.showPrompt = true;
-    this.message = 'medical test profile '+name;
-  }
-  
-
-  deleteMedicalTestProfile()
-  {
+  deleteMedicalTestProfile(id: number, status:boolean){
      let fd= new FormData();
-     fd.append('id',this.medicalTestProfile.id.toString());
-     fd.append('is_deleted','True')
-     this.medicalTestProfileservice.partial_update_medical_test_profile(fd).subscribe(
-      {
+     fd.append('id', id.toString());
+     fd.append('is_deleted', status ? 'False':'True');
+     this.medicalTestProfileservice.partial_update_medical_test_profile(fd).subscribe({
         next: data => {
           this.getMedicalTestProfiles();
-          this.openSnackBar();
-
+          // this.openSnackBar();
         }
       }
      );
   }
-
   openSnackBar() {
     this.matSnackBar.open('Medical Test Profile Deleted', 'Dismiss', {
       duration: 2000
     });
   }
-
 }

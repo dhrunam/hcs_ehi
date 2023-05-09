@@ -42,7 +42,6 @@ export class EditComponent {
           this.medicalTestService.get_medical_test(this.id).subscribe(
             {
               next: data => {
-                console.log(data.name);
                 this.medical_test=data
               }
             }
@@ -57,7 +56,6 @@ export class EditComponent {
     this.medicalTestService.get_medical_test_profiles().subscribe({
       next: data=>{
         this.medical_test_profiles=data;
-        console.log(this.medical_test_profiles);
       }
     });
   }
@@ -76,8 +74,7 @@ export class EditComponent {
       fd.append('profile', data.value.test_profile);
       fd.append('normal_min_value', data.value.normal_min_value);
       fd.append('normal_max_value', data.value.normal_max_value);    
-      fd.append('unit',data.value.unit);  
-
+      fd.append('unit',data.value.unit); 
       if(this.editMode)
       {
         fd.append('id', this.medical_test.id.toString())
