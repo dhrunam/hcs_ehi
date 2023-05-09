@@ -25,7 +25,7 @@ export class ViewComponent {
   getOrganisations(){
     this.organisationService.get_organisations().subscribe({
       next: data => {
-        this.organisations = data.results;
+        this.organisations = data;
       }
     })
   }

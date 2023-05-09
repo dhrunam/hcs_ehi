@@ -9,12 +9,9 @@ const routes: Routes = [
   { path: 'section', loadChildren: () => import('./section/section.module').then(m => m.SectionModule) },
   { path: 'employee-type', loadChildren: () => import('./employee-type/employee-type.module').then(m => m.EmployeeTypeModule) },
   { path: 'empgroup', loadChildren: () => import('./empgroup/empgroup.module').then(m => m.EmpgroupModule) },
-<<<<<<< HEAD
-=======
   {path: 'medical-test-profile', loadChildren:()=> import('./medical-test-profile/medical-test-profile.module').then(m=>m.MedicalTestProfileModule)},
   {path:'medical-test',loadChildren:()=> import('./medical-test/medical-test.module').then(m=>m.MedicalTestModule)},
  { path: 'organisation', loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule) },
->>>>>>> d39fd0be9295d5eb66975e1cb759f5953bd64911
 ]
 @NgModule({
   declarations: [

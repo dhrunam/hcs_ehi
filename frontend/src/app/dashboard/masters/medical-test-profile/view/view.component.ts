@@ -56,7 +56,10 @@ export class ViewComponent {
 
   deleteMedicalTestProfile()
   {
-     this.medicalTestProfileservice.delete_medical_test_profile(this.medicalTestProfile.id).subscribe(
+     let fd= new FormData();
+     fd.append('id',this.medicalTestProfile.id.toString());
+     fd.append('is_deleted','True')
+     this.medicalTestProfileservice.partial_update_medical_test_profile(fd).subscribe(
       {
         next: data => {
           this.getMedicalTestProfiles();

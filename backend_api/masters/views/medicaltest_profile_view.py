@@ -4,7 +4,7 @@ from masters import serializers as master_serializers
 
 class MedicalTestProfileList(generics.ListCreateAPIView):
 
-    queryset= master_model.MedicalTestProfile.objects.all().order_by('-id')
+    queryset= master_model.MedicalTestProfile.objects.filter(is_deleted=False).order_by('-id')
     serializer_class= master_serializers.MedicalTestProfileSerializer
 
 

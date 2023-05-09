@@ -31,8 +31,12 @@ export class MedicalTestService {
     return this.http.put(`${URL}/masters/medical_test/${data.get('id')}`,data)
   }
 
-  delete_medical_test(data:FormData){
+  partial_update_medical_test(data:FormData){
     return this.http.patch(`${URL}/masters/medical_test/${data.get('id')}`,data)
+  }
+  
+  delete_medical_test(id:number){
+    return this.http.delete(`${URL}/masters/medical_test/${id}`)
   }
 
 }

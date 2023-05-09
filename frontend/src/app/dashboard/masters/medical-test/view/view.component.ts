@@ -49,10 +49,8 @@ export class ViewComponent {
   }
 
   deleteMedicalTest(){
-    let fd=new FormData();
-    fd.append('id', this.medical_test.id.toString());
-    fd.append('is_deleted', 'True')
-    this.medicalTestService.delete_medical_test(fd).subscribe({
+
+    this.medicalTestService.delete_medical_test(this.medical_test.id).subscribe({
       next: data=>{
         this.getMedicalTests();
         this.openSnackBar();

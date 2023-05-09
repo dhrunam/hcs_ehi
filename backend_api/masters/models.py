@@ -64,15 +64,14 @@ class Section(models.Model):
 
 class MedicalTestProfile(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
+    is_deleted=models.BooleanField(default=False);
 
 class MedicalTest(models.Model):
-    profile=models.ForeignKey(MedicalTestProfile, null=True, on_delete=models.SET_NULL, related_name='medical_test')
+    profile=models.ForeignKey(MedicalTestProfile, null=True, on_delete=models.CASCADE, related_name='medical_test')
     name = models.CharField(max_length=256)
     normal_min_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
     normal_max_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
     unit = models.CharField(max_length=10, blank=True, default='')
-    is_deleted=models.BooleanField(default=False);
-
 
 class EmpSection(models.Model):
     empname = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name='medical_test')
