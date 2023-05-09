@@ -5,6 +5,12 @@ from masters import models as masters_models
 from django.contrib.auth.models import User,Group
 
 
+class HelperOrganisationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = masters_models.Organisation
+        fields = ('id', 'name')
+
 class DistrictSerializer(serializers.ModelSerializer):
   
     class Meta:
@@ -64,34 +70,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
                      )
 
 class SectionSerializer(serializers.ModelSerializer):
-    
+    related_organisation = HelperOrganisationSerializer(source='organisation', read_only =True)
+
     class Meta:
         model = masters_models.Section
-        fields = ('id', 'name', 'organisation')
-
-    def to_representation(self, instance):
-        rep = super(SectionSerializer, self).to_representation(instance)
-        rep['organisation'] = instance.organisation.name
-        return rep
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        fields = ('id', 'name', 'organisation', 'related_organisation')
 
 class MedicalTestProfileSerializer(serializers.ModelSerializer):
-
 
     class Meta:
         model = masters_models.MedicalTestProfile

@@ -27,6 +27,6 @@ export class SectionService{
     }
     get_organisations()
     {
-        return this.http.get<any>(`${URL}/masters/organisation`)
+        return this.http.get<any>(`${URL}/masters/organisation/list`)
     }
 }

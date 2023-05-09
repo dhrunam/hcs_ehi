@@ -64,7 +64,7 @@ export class EditComponent {
   get_organisation(){
     this.sectionService.get_organisations().subscribe({
       next: data => {
-       this.organisationlist = data.results;
+       this.organisationlist = data;
       }
     })
   }

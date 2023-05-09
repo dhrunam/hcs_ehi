@@ -2,7 +2,7 @@
     <h3>{{ editMode ? 'Edit Section' : 'Add Section'}}</h3>
     <mat-divider></mat-divider>
     <form #section="ngForm" (ngSubmit)="onSubmit(section)">
-        <div class="content">
+        <div class="row">
             <mat-form-field appearance="outline" >
                 <mat-label> Section Name</mat-label>
                 <input matInput placeholder="Section Name" name="name" [ngModel]="section_name" #name="ngModel">
@@ -15,7 +15,6 @@
                        {{item.name}}
                     </mat-option>
                 </mat-select>
-    
             </mat-form-field> 
             <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
         </div>
