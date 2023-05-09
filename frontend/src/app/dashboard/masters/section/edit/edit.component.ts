@@ -4,6 +4,7 @@ import { SectionService } from '../section.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { OrganisationService } from '../../organisations/organisations.service';
 
 @Component({
   selector: 'app-edit',
@@ -12,11 +13,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditComponent {
   section_name: string = '';
-  organisation: number = 0;
+  organisation_id: number = 0;
   organisationlist: Array< { id:number, name : string}> = []
   id:number = 0;
   editMode: boolean = false;
-  constructor(private sectionService: SectionService, private route: ActivatedRoute, private router: Router){}
+  constructor(private sectionService: SectionService, private organisationService: OrganisationService, private route: ActivatedRoute, private router: Router){}
   ngOnInit(): void{
     this.get_organisation();
     this.route.params.subscribe({
@@ -27,7 +28,7 @@ export class EditComponent {
           this.sectionService.get_section(param['id']).subscribe({
             next: data => {
               this.section_name = data.name;
-              this.organisation = data.organisation
+              this.organisation_id = data.organisation
             }
           })
         }
@@ -35,7 +36,6 @@ export class EditComponent {
     })
   }
   onSubmit(data: NgForm){
-    console.log(data);
     let observable: Observable<any>;
     if(!data.valid){
       data.control.markAllAsTouched();
@@ -62,7 +62,7 @@ export class EditComponent {
   }
 
   get_organisation(){
-    this.sectionService.get_organisations().subscribe({
+    this.organisationService.get_organisations().subscribe({
       next: data => {
        this.organisationlist = data;
       }

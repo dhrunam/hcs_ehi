@@ -2,15 +2,19 @@
     <h3>{{ editMode ? 'Edit Section' : 'Add Section'}}</h3>
     <mat-divider></mat-divider>
     <form #section="ngForm" (ngSubmit)="onSubmit(section)">
+<<<<<<< HEAD
         <div class="row">
             <mat-form-field appearance="outline" >
+=======
+        <div class="content">
+            <mat-form-field appearance="outline">
+>>>>>>> d39fd0be9295d5eb66975e1cb759f5953bd64911
                 <mat-label> Section Name</mat-label>
                 <input matInput placeholder="Section Name" name="name" [ngModel]="section_name" #name="ngModel">
-              </mat-form-field>
-
-               <mat-form-field appearance="outline">
-                <mat-label> Organisation</mat-label>
-                <mat-select [ngModel]="organisation" name="organisation" #name="ngModel" required="">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> Select Organisation</mat-label>
+                <mat-select [ngModel]="organisation_id" name="organisation" #name="ngModel" required="">
                     <mat-option *ngFor="let item of organisationlist" [value]="item.id">
                        {{item.name}}
                     </mat-option>

@@ -4,6 +4,10 @@ from masters import models as masters_models
 # from axes.admin import AccessLog
 from django.contrib.auth.models import User,Group
 
+class HelperOrganisationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = masters_models.Organisation
+        fields =( 'id','name')
 
 class HelperOrganisationSerializer(serializers.ModelSerializer):
 
@@ -70,11 +74,40 @@ class EmployeeSerializer(serializers.ModelSerializer):
                      )
 
 class SectionSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     related_organisation = HelperOrganisationSerializer(source='organisation', read_only =True)
 
     class Meta:
         model = masters_models.Section
         fields = ('id', 'name', 'organisation', 'related_organisation')
+=======
+    related_organisation = HelperOrganisationSerializer(source = 'organisation', read_only=True)
+    
+    class Meta:
+        model = masters_models.Section
+        fields = ('id', 'name', 'organisation', 'related_organisation')
+
+    def to_representation(self, instance):
+        rep = super(SectionSerializer, self).to_representation(instance)
+        rep['organisation'] = instance.organisation.name
+        return rep
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> d39fd0be9295d5eb66975e1cb759f5953bd64911
 
 class MedicalTestProfileSerializer(serializers.ModelSerializer):
 
@@ -98,6 +131,7 @@ class MedicalTestSerializer(serializers.ModelSerializer):
             'normal_min_value',
             'normal_max_value',
             'unit',
+            'is_deleted',
             'related_profile'
 
         )

@@ -1,0 +1,21 @@
+mat-card{
+    background-color: #FFE8E8;
+    color: red;
+    animation-name: diagonal-slide;
+    animation-duration: 0.13s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 2;
+}
+mat-card mat-card-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@keyframes diagonal-slide {
+    from { top: 0; left: 0; animation-timing-function: linear; }
+    20% { top: -5px; left: -5px; animation-timing-function: linear; }
+    40% { top: 5px; left: -5px; animation-timing-function: linear; }
+    60% { top: 5px; left: 5px; animation-timing-function: linear; }
+    80% { top: -5px; left: 5px; animation-timing-function: linear; }
+    to { top: 0; left: 0; animation-timing-function: linear; }
+}

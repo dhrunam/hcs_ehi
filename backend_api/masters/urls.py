@@ -31,16 +31,23 @@ urlpatterns = [
 
     path('masters/employee', masters_views.EmployeeList.as_view()),
     path('masters/employee/<int:pk>', masters_views.EmployeeDetails.as_view()),
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> d39fd0be9295d5eb66975e1cb759f5953bd64911
     path('masters/section', masters_views.SectionList.as_view()),
     path('masters/section/<int:pk>', masters_views.SectionDetails.as_view()),
     path('masters/section/list', masters_views.SectionListWithoutPagination.as_view()),
 
+<<<<<<< HEAD
 
     path('masters/employee_type', masters_views.EmployeeTypeList.as_view()),
     path('masters/employee_type/<int:pk>', masters_views.EmployeeTypeDetails.as_view()),
 
+=======
+>>>>>>> d39fd0be9295d5eb66975e1cb759f5953bd64911
     path('masters/medical_test_profile', masters_views.MedicalTestProfileList.as_view()),
     path('masters/medical_test_profile/<int:pk>', masters_views.MedicalTestProfileDetails.as_view()),
     path('masters/medical_test_profile/list', masters_views.MedicalTestProfileListWithoutPagination.as_view()),

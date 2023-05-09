@@ -7,7 +7,7 @@ from masters import (
 
 
 class MedicalTestList(generics.ListCreateAPIView):
-    queryset = master_models.MedicalTest.objects.all().order_by('-id')
+    queryset = master_models.MedicalTest.objects.filter(is_deleted=False).order_by('-id')
     serializer_class = master_serializers.MedicalTestSerializer
 
 
@@ -15,7 +15,7 @@ class MedicalTestDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.MedicalTest
     serializer_class = master_serializers.MedicalTestSerializer
 
-class MedicalTestListWithoutPagination(generics.ListCreateAPIView):
+class MedicalTestListWithoutPagination(generics.ListAPIView):
     queryset = master_models.MedicalTest.objects.all().order_by('-id')
     serializer_class = master_serializers.MedicalTestSerializer
     pagination_class = None

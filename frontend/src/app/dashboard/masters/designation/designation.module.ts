@@ -6,6 +6,7 @@ import { EditComponent } from './edit/edit.component';
 import { DesignationRoutingModule } from './designation-routing.module';
 import { MaterialModule } from 'src/app/material/material.module';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     MaterialModule,
     DesignationRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class DesignationModule { }
