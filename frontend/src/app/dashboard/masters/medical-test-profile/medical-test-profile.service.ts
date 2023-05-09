@@ -26,6 +26,12 @@ export class MedicalTestProfileService {
   {
     return this.http.put(`${URL}/masters/medical_test_profile/${data.get('id')}`,data);
   }
+
+  partial_update_medical_test_profile(data:FormData)
+  {
+    return this.http.patch(`${URL}/masters/medical_test_profile/${data.get('id')}`,data);
+  }
+
   delete_medical_test_profile(id:number){
     return this.http.delete(`${URL}/masters/medical_test_profile/${id}`);
   }

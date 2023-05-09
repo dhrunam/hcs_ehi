@@ -30,7 +30,7 @@ export class ViewComponent {
     let fd=new FormData();
     fd.append('id', id.toString());
     fd.append('is_deleted', status ? 'False' : 'True');
-    this.medicalTestService.delete_medical_test(fd).subscribe({
+    this.medicalTestService.partial_update_medical_test(fd).subscribe({
       next: data=>{
         this.getMedicalTests();
         // this.openSnackBar();
