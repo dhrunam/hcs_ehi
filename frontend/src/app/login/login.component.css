@@ -39,12 +39,12 @@ mat-error{
 .submit mat-label span{
     margin-left: 1rem;
 }
-@media(max-width: 1261px){
+@media(max-width: 1439px){
     mat-card{
-        width: 30%;
+        width:30%;
     }
 }
-@media(max-width: 1000px){
+@media(max-width: 1120px){
     mat-card{
         width: 40%;
     }
