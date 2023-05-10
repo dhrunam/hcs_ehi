@@ -73,8 +73,9 @@ class MedicalTest(models.Model):
     normal_max_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
     unit = models.CharField(max_length=10, blank=True, default='')
     is_deleted=models.BooleanField(default=False);
+
 class EmpSection(models.Model):
-    empname = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name='medical_test')
+    empname = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name='emp_session')
 
 
 

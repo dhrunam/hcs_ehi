@@ -84,6 +84,31 @@ class SectionSerializer(serializers.ModelSerializer):
         rep = super(SectionSerializer, self).to_representation(instance)
         rep['organisation'] = instance.organisation.name
         return rep
+class HelperMedicalTestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = masters_models.MedicalTest
+        fields = (
+            'id',
+            'profile',
+            'name',
+            'normal_min_value',
+            'normal_max_value',
+            'unit',
+            'is_deleted',
+
+
+        )
+class HelperMedicalTestProfileSerializer(serializers.ModelSerializer):
+    related_tests=HelperMedicalTestSerializer(source='medical_test', many=True, read_only=True)
+    class Meta:
+        model = masters_models.MedicalTestProfile
+        fields = (
+            'id',
+            'name',
+            'is_deleted',
+            'related_tests',
+        )
 
 class MedicalTestProfileSerializer(serializers.ModelSerializer):
 
