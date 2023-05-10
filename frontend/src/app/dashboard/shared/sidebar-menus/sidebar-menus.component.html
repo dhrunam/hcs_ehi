@@ -10,7 +10,7 @@
     <li class="menu-item">
         <div class="icon-links" (click)="onSubMenuToggle(elem1,elem2,'masters')">
             <mat-label>
-                <mat-icon>space_dashboard</mat-icon>
+                <mat-icon>dataset</mat-icon>
                 <span>Masters</span>
             </mat-label>
             <div class="icon" #elem1 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
@@ -36,9 +36,15 @@
                     <span>Section</span>
                 </label>
             </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/designation" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>card_membership</mat-icon>
+                    <span>Designation</span>
+                </label>
+            </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/empgroup" routerLinkActive="active">
                 <label>
-                    <mat-icon>assignment_ind</mat-icon>
+                    <mat-icon>groups_2</mat-icon>
                     <span>Employee Group</span>
                 </label>
             </li>
@@ -46,12 +52,6 @@
                 <label>
                     <mat-icon>assignment_ind</mat-icon>
                     <span>Employee Type</span>
-                </label>
-            </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/designation" routerLinkActive="active" (click)="onToggleKey('masters')">
-                <label>
-                    <mat-icon>card_membership</mat-icon>
-                    <span>Designation</span>
                 </label>
             </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/employee" routerLinkActive="active" (click)="onToggleKey('masters')">
@@ -85,10 +85,10 @@
             </div>
         </div>
         <ul class="sub-menu" #elem4 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
-            <li class="sub-menu-item" routerLink="/dashboard/configurations/district" routerLinkActive="active" (click)="onToggleKey('masters')">
+            <li class="sub-menu-item" routerLink="/dashboard/configurations/session-config" routerLinkActive="active" (click)="onToggleKey('configurations')">
                 <label>
-                    <mat-icon>place</mat-icon>
-                    <span>District</span>
+                    <mat-icon>settings_ethernet</mat-icon>
+                    <span>Session</span>
                 </label>
             </li>
         </ul>
