@@ -1,0 +1,16 @@
+<header>
+    <h3>{{ editMode ? 'Edit Session' : 'Add Session'}}</h3>
+</header>
+<mat-divider></mat-divider>
+<div class="row">
+    <mat-form-field appearance="outline">
+        <mat-label>Date of Entry in Service</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedYear" name="emp_does" ngModel #emp_does="ngModel" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="multi-year" (yearSelected)="chosenYearHandler($event)"></mat-datepicker>
+        <!-- <mat-error *ngIf="emp_does.touched && emp_does.invalid">Please select Date of Entry in Service</mat-error> -->
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label></mat-label>
+    </mat-form-field>
+</div>

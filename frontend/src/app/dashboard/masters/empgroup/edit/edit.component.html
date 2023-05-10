@@ -1,1 +1,14 @@
-<p>edit works!</p>
+<section>
+    <h3>{{ editMode ? 'Edit Employee Group' : 'Add Employee Group'}}</h3>
+    <mat-divider></mat-divider>
+    <form #empgroup="ngForm" (ngSubmit)="onSubmit(empgroup)">
+        <div class="content">
+            <mat-label>Employee Group:</mat-label>
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Enter Employee Group" name="name" [ngModel]="empgroup_name" #name="ngModel" required>
+                <mat-error>Please enter Employee Group </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
+        </div>
+    </form>
+</section>

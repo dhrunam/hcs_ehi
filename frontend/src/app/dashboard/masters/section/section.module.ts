@@ -6,6 +6,7 @@ import { SectionComponent } from './section.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
 import { SectionRoutingModule } from './section-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SectionRoutingModule } from './section-routing.module';
     MaterialModule,
     SectionRoutingModule,
     FormsModule,
+    SharedModule,
   ]
 })
 export class SectionModule { }

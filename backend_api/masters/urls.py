@@ -34,6 +34,7 @@ urlpatterns = [
     
     path('masters/section', masters_views.SectionList.as_view()),
     path('masters/section/<int:pk>', masters_views.SectionDetails.as_view()),
+    path('masters/section/list', masters_views.SectionListWithoutPagination.as_view()),
 
     path('masters/medical_test_profile', masters_views.MedicalTestProfileList.as_view()),
     path('masters/medical_test_profile/<int:pk>', masters_views.MedicalTestProfileDetails.as_view()),

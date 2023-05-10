@@ -15,8 +15,11 @@ class SectionList(generics.ListCreateAPIView):
     queryset = master_models.Section.objects.all().order_by('-id')
     serializer_class =  master_serializers.SectionSerializer
    
-
-
 class SectionDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = master_models.Section
     serializer_class =  master_serializers.SectionSerializer
+
+class SectionListWithoutPagination(generics.ListAPIView):
+    queryset = master_models.Section.objects.all().order_by('-id')
+    serializer_class =  master_serializers.SectionSerializer
+    pagination_class = None

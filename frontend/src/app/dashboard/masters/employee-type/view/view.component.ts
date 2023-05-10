@@ -21,7 +21,7 @@ export class ViewComponent {
     this.getEmployeeTypes();
   }
   openSnackBar() {
-    this._snackBar.open('District Deleted', 'Dismiss', {
+    this._snackBar.open('Employee Type Deleted', 'Dismiss', {
       duration: 2000
     });
   }

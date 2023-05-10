@@ -72,6 +72,6 @@
                 <!-- <mat-error *ngIf="emp_add.touched && emp_add.invalid">Please enter Address</mat-error> -->
             </mat-form-field>
         </div>
-        <button mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="primary">{{ editMode ? 'Update' : 'Submit'}}</button>
     </form>
 </main>

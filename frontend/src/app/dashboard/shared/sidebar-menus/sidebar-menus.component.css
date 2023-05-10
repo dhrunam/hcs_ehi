@@ -10,7 +10,6 @@ ul{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     user-select: none;
-    margin-top: 8px;
 }
 .sub-menu{
     background-color: #FCFCFC;
@@ -31,7 +30,9 @@ ul{
     border-radius: 20px;
     border-top-right-radius: 18px;
     border-bottom-right-radius: 18px;
-    padding: 0.8rem;
+}
+.sub-menu-item{
+    padding: 0.6rem;
 }
 .icon-links{
     display: flex;
@@ -47,9 +48,6 @@ label{
 }
 .icon-links mat-icon{
     transition: all 0.3s ease;
-}
-.icon mat-icon{
-    margin-top: 6px;
 }
 .i:hover,
 .i.active,

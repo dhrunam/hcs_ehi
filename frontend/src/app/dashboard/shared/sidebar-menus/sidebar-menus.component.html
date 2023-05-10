@@ -10,7 +10,7 @@
     <li class="menu-item">
         <div class="icon-links" (click)="onSubMenuToggle(elem1,elem2,'masters')">
             <mat-label>
-                <mat-icon>space_dashboard</mat-icon>
+                <mat-icon>dataset</mat-icon>
                 <span>Masters</span>
             </mat-label>
             <div class="icon" #elem1 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
@@ -20,14 +20,32 @@
         <ul class="sub-menu" #elem2 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
             <li class="sub-menu-item" routerLink="/dashboard/masters/district" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
-                    <mat-icon>domain</mat-icon>
+                    <mat-icon>place</mat-icon>
                     <span>District</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/organisation" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>domain</mat-icon>
+                    <span>Organisation</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/section" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>meeting_room</mat-icon>
+                    <span>Section</span>
                 </label>
             </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/designation" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>card_membership</mat-icon>
                     <span>Designation</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/empgroup" routerLinkActive="active">
+                <label>
+                    <mat-icon>groups_2</mat-icon>
+                    <span>Employee Group</span>
                 </label>
             </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/employee-type" routerLinkActive="active" (click)="onToggleKey('masters')">
@@ -40,6 +58,37 @@
                 <label>
                     <mat-icon>person</mat-icon>
                     <span>Employee</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test-profile/view" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>colorize</mat-icon>
+                    <span>Test Profile</span>
+                </label>
+            </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test/view" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>fingerprint</mat-icon>
+                    <span>Medical Test</span>
+                </label>
+            </li>
+        </ul>
+    </li>
+    <li class="menu-item">
+        <div class="icon-links" (click)="onSubMenuToggle(elem3,elem4,'configurations')">
+            <mat-label>
+                <mat-icon>settings</mat-icon>
+                <span>Configurations</span>
+            </mat-label>
+            <div class="icon" #elem3 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
+                <mat-icon>keyboard_arrow_up</mat-icon>
+            </div>
+        </div>
+        <ul class="sub-menu" #elem4 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
+            <li class="sub-menu-item" routerLink="/dashboard/configurations/session-config" routerLinkActive="active" (click)="onToggleKey('configurations')">
+                <label>
+                    <mat-icon>settings_ethernet</mat-icon>
+                    <span>Session</span>
                 </label>
             </li>
         </ul>
