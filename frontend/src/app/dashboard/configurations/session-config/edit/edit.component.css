@@ -1,0 +1,36 @@
+main{
+    padding-left: 20rem;
+    padding-right: 20rem;
+    margin-top: 2rem;
+}
+.row,section{
+    display: flex;
+    margin-top: 1rem;
+}
+mat-form-field{
+    margin-left: 1rem;
+    width: 34%;
+}
+.profiles{
+    margin-top: 0.7rem;
+}
+mat-card{
+    width: 100%;
+}
+mat-card.error{
+    box-shadow: 1px 1px 3px 0px rgba(255,0,0,0.75);
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(255,0,0,0.75);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(255,0,0,0.75);
+}
+mat-card-header{
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+mat-card-content, mat-error{
+    padding: 1rem;
+}
+button{
+    margin-top: 1rem;
+    float:right;
+}

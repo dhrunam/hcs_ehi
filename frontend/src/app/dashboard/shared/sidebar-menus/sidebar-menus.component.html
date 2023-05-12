@@ -14,7 +14,7 @@
                 <span>Masters</span>
             </mat-label>
             <div class="icon" #elem1 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
-                <mat-icon>keyboard_arrow_up</mat-icon>
+                <mat-icon>chevron_right</mat-icon>
             </div>
         </div>
         <ul class="sub-menu" #elem2 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
@@ -81,7 +81,7 @@
                 <span>Configurations</span>
             </mat-label>
             <div class="icon" #elem3 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
-                <mat-icon>keyboard_arrow_up</mat-icon>
+                <mat-icon>chevron_right</mat-icon>
             </div>
         </div>
         <ul class="sub-menu" #elem4 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
