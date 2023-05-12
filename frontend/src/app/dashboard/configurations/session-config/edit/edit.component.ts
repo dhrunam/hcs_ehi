@@ -41,8 +41,7 @@ export class EditComponent {
         }
       }
     })
-  }
-  ngAfterViewInit(): void{}
+  } 
   chosenYearHandler(ev:any){
     let { _d } = ev;
     this.selectedYear = _d;
@@ -65,6 +64,7 @@ export class EditComponent {
         profiles.forEach((d:any) => {
           this.send_profiles.push(d.medical_test_profile);
         })
+        this.select_all = this.profiles.length === this.send_profiles.length;
       }
     })
   }
@@ -79,36 +79,27 @@ export class EditComponent {
     })
   }
   selectAll(completed: boolean){
-    this.select_all = completed;
     this.send_profiles = [];
-    if(completed){
-      this.profiles.forEach(p => {
-        p.completed = completed;
+    this.select_all = completed;
+    this.profiles.forEach(p => {
+      p.completed = completed;
+      if(completed){
         this.send_profiles.push(p.id);
-      });
-    }
-    else{
-      this.profiles.forEach(p => {
-        p.completed = completed;
-      });
-    }
+      }
+    });
   }
   updateSelectAll(event: any, id:number) {
-    this.session_details.profiles = [];
+    let index = this.profiles.findIndex(i => i.id === id);
     if(event.checked){
       this.send_profiles.push(id);
+      this.profiles[index].completed = true;
     }
     else{
-      let index = this.send_profiles.findIndex(p => p === id);
-      this.send_profiles.splice(index,1);
+      let s_index = this.send_profiles.findIndex(p => p === id);
+      this.send_profiles.splice(s_index,1);
+      this.profiles[index].completed = false;
     }
-    this.select_all = this.profiles.every(p => p.completed);
-  }
-  someComplete(): boolean {
-    if(!this.send_profiles[0]){
-      return false;
-    }
-    return this.profiles.filter(p => p.completed).length > 0 && !this.select_all;
+    this.select_all = this.profiles.length === this.send_profiles.length;
   }
   onSubmit(data: NgForm){
     if(!data.valid){
