@@ -4,7 +4,7 @@ from masters import serializers as master_serializer
 
 
 class HelperMedicalTestProfilePerSessionSerializer(serializers.ModelSerializer):
-    related_test_profile = master_serializer.MedicalTestProfileSerializer(source='medical_test_profile', read_only=True)
+    related_test_profile = master_serializer.HelperMedicalTestProfileSerializer(source='medical_test_profile', read_only=True)
 
     class Meta:
         model = conf_models.MedicalTestProfilePerSession
