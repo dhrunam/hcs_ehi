@@ -16,3 +16,6 @@ mat-form-field{
 button{
     float: right;
 }
+table{
+    margin-top: 1rem;
+}

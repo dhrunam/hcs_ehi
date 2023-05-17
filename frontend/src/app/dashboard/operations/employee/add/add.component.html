@@ -10,8 +10,8 @@
             </mat-form-field>
             <mat-form-field>
               <mat-label>Session</mat-label>
-              <mat-select>
-                <mat-option></mat-option>
+              <mat-select name="session" ngModel #session="ngModel" required (selectionChange)="getTests($event)">
+                <mat-option *ngFor="let s of sessions" [value]="s.id" >{{s.session}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -67,10 +67,33 @@
     </mat-step>
   <form #secondForm="ngForm">
     <mat-step label="Health Records" [stepControl]="secondForm.controls['second_form']" ngModelGroup="second_form">
-      <!-- <mat-form-field>
-        <mat-label>Test</mat-label>
-        <input matInput>
-      </mat-form-field> -->
+      <div *ngFor="let r of tests">
+        <h4>PROFILE: {{r.related_test_profile.name}}</h4>
+        <mat-divider></mat-divider>
+        <table mat-table [dataSource]="r.related_test_profile.related_tests">
+          <ng-container matColumnDef="sno">
+            <th mat-header-cell *matHeaderCellDef> S.No. </th>
+            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+          </ng-container>
+          <ng-container matColumnDef="test_name">
+            <th mat-header-cell *matHeaderCellDef> Test </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef> Result </th>
+            <td mat-cell *matCellDef="let element">
+                <input style="width:15%" type="number" required ngModel [name]="element.name"> {{ element.unit }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="range">
+            <th mat-header-cell *matHeaderCellDef> Normal Range </th>
+            <td mat-cell *matCellDef="let element"> {{element.normal_min_value}} - {{element.normal_max_value}} {{element.unit}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
     </mat-step>
   </form>
   <mat-step label="Preview">

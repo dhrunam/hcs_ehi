@@ -14,14 +14,17 @@ interface Employee{
 })
 export class AddComponent {
   date!: Date;
+  tests: Array<any> = [];
+  sessions: Array<any> = [];
   employee: Employee = { id: 0, name: ''};
   employees: Array<any> = [];
   filteredEmployees!: Observable<any[]>;
+  displayedColumns = ['sno','test_name','result','range'];
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
     this.getEmployees();
     this.date = new Date();
-
+    this.getSessions(this.date.getFullYear().toString());
   }
   getEmployees(){
     this.employeeService.get_employees().subscribe({
@@ -29,6 +32,17 @@ export class AddComponent {
         this.employees = data.results;
       }
     })
+  }
+  getSessions(year: string){
+    this.healthRecordService.get_sessions(year).subscribe({
+      next: data => { 
+        this.sessions = data.results;
+      },
+    })
+  }
+  getTests(id: any){
+    this.tests = [];
+    this.tests = this.sessions.find(session => session.id === id.value).related_profiles;
   }
   onSearchEmployee(key:string){
     key.length >=2 ? this.filteredEmployees = of(this._filter(key)) : this.filteredEmployees = of([]);
@@ -50,11 +64,10 @@ export class AddComponent {
       fd.append('location',data.value.location);
       fd.append('analyst', data.value.analyst);
       fd.append('ref_doctor', data.value.ref_doctor);
-      // this.healthRecordService.save_draft(fd).subscribe({
-      //   next: data => {
-      //     console.log(data);
-      //   }
-      // })
+      fd.append('medical_test_session', data.value.session);
+      this.healthRecordService.save_draft(fd).subscribe({
+        next: data => {}
+      })
     }
   }
   private _filter(value: string): any[] {
