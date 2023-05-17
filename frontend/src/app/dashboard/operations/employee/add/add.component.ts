@@ -13,12 +13,15 @@ interface Employee{
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
+  date!: Date;
   employee: Employee = { id: 0, name: ''};
   employees: Array<any> = [];
   filteredEmployees!: Observable<any[]>;
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
     this.getEmployees();
+    this.date = new Date();
+
   }
   getEmployees(){
     this.employeeService.get_employees().subscribe({
@@ -41,7 +44,7 @@ export class AddComponent {
       let collection_date = new Date(data.value.collection_date);
       let registration_date = new Date(data.value.registration_date);
       let fd = new FormData();
-      fd.append('user', this.employee.id.toString());
+      fd.append('employee', this.employee.id.toString());
       fd.append('collection_date', `${collection_date.getFullYear()}-${collection_date.getMonth() + 1 < 10 ? '0':''}${collection_date.getMonth()+1}-${collection_date.getDate() < 10 ? '0':''}${collection_date.getDate()}`);
       fd.append('reg_date', `${registration_date.getFullYear()}-${registration_date.getMonth() + 1 < 10 ? '0':''}${registration_date.getMonth()+1}-${registration_date.getDate() < 10 ? '0':''}${registration_date.getDate()}`);
       fd.append('location',data.value.location);

@@ -2,53 +2,67 @@
   
     <mat-step [stepControl]="firstForm.control" label="Employee">
       <form #firstForm="ngForm" (ngSubmit)="onSaveDraft(firstForm)">
-      <section>
-        <div class="row">
-          <mat-form-field>
-            <mat-label>Search Employee</mat-label>
-            <input type="text"
-                  matInput
-                  [matAutocomplete]="auto"
-                  (keyup)="onSearchEmployee(emp_key.value)"
-                  name="emp_key"
-                  [ngModel]="employee.name"
-                  #emp_key="ngModel"
-                  required>
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let emp of filteredEmployees | async" [value]="emp.id" (click)="onSelectEmployee({id: emp.id, name: emp.name})">
-                {{emp.name}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Sample Collection Date</mat-label>
-            <input matInput [matDatepicker]="picker1" name="collection_date" ngModel #collection_date="ngModel" required>
-            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Sample Registration Date</mat-label>
-            <input matInput [matDatepicker]="picker2" name="registration_date" ngModel #registration_date="ngModel" required>
-            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field>
-            <mat-label>Location</mat-label>
-            <input matInput type="text" name="location" ngModel #location="ngModel">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Ref. Dr.</mat-label>
-            <input matInput type="text" name="ref_doctor" ngModel #ref_doctor="ngModel">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Analyst</mat-label>
-            <input matInput type="text" name="analyst" ngModel #analyst="ngModel">
-          </mat-form-field>
-        </div>
-        <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
-      </section>
+        <section>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Year</mat-label>
+              <input matInput type="text" [value]="date.getFullYear()" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Session</mat-label>
+              <mat-select>
+                <mat-option></mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label> Employee</mat-label>
+              <input type="text"
+                    matInput
+                    [matAutocomplete]="auto"
+                    (keyup)="onSearchEmployee(emp_key.value)"
+                    name="emp_key"
+                    [ngModel]="employee.name"
+                    #emp_key="ngModel"
+                    required>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let emp of filteredEmployees | async" [value]="emp.id" (click)="onSelectEmployee({id: emp.id, name: emp.name})">
+                  {{emp.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Location</mat-label>
+              <input matInput type="text" name="location" ngModel #location="ngModel">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Sample Collection Date</mat-label>
+              <input matInput [matDatepicker]="picker1" name="collection_date" ngModel #collection_date="ngModel" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Sample Registration Date</mat-label>
+              <input matInput [matDatepicker]="picker2" name="registration_date" ngModel #registration_date="ngModel" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Ref. Dr.</mat-label>
+              <input matInput type="text" name="ref_doctor" ngModel #ref_doctor="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Analyst</mat-label>
+              <input matInput type="text" name="analyst" ngModel #analyst="ngModel">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
+        </section>
       </form>
     </mat-step>
   <form #secondForm="ngForm">
