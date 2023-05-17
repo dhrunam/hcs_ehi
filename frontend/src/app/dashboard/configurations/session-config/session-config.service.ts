@@ -20,6 +20,6 @@ export class SessionConfigService{
         return this.http.post(`${URL}/config/medical_test_session`, data);
     }
     update_session(data: FormData){
-        return this.http.put(`${URL}/config/medical_test_session/${data.get('id')}`,data);
+        return this.http.patch(`${URL}/config/medical_test_session/${data.get('id')}`,data);
     }
 }

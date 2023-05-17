@@ -18,7 +18,9 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   declarations: [],
   imports: [
@@ -42,6 +44,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
     MatMenuModule,
     MatAutocompleteModule,
     MatSlideToggleModule,
+    MatCheckboxModule,
+    MatStepperModule,
   ],
   exports: [
     CommonModule,
@@ -64,6 +68,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
     MatMenuModule,
     MatAutocompleteModule,
     MatSlideToggleModule,
+    MatCheckboxModule,
+    MatStepperModule,
   ]
 })
 export class MaterialModule { }

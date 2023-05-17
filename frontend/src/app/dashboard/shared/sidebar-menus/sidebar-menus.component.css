@@ -73,5 +73,5 @@ mat-label span{
     font-size: 18px;
 }
 .icon.active mat-icon{
-    rotate: 180deg;
+    rotate: 90deg;
 }
