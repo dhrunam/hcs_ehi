@@ -7,6 +7,7 @@ class EmpHealthProfileTestSerializer(serializers.ModelSerializer):
         model = op_models.EmpHealthProfileTest
         fields= (
             'id',
+            'medical_test_session',
             'user',
             'sample_type',
             'collection_date',

@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from masters import models as master_models
+from configuration import models as conf_models
+
 
 # Create your models here.
 
 class EmpHealthProfileTest(models.Model):
+    medical_test_session = models.ForeignKey(conf_models.MedicalTestSession, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
     user=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
     sample_type=models.CharField(max_length=512, null=True, default='')
     collection_date=models.DateField(auto_created=False, auto_now=False)
