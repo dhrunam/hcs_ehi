@@ -50,11 +50,11 @@ export class AddComponent {
       fd.append('location',data.value.location);
       fd.append('analyst', data.value.analyst);
       fd.append('ref_doctor', data.value.ref_doctor);
-      this.healthRecordService.save_draft(fd).subscribe({
-        next: data => {
-          console.log(data);
-        }
-      })
+      // this.healthRecordService.save_draft(fd).subscribe({
+      //   next: data => {
+      //     console.log(data);
+      //   }
+      // })
     }
   }
   private _filter(value: string): any[] {
