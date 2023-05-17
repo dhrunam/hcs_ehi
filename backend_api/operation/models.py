@@ -5,7 +5,7 @@ from masters import models as master_models
 # Create your models here.
 
 class EmpHealthProfileTest(models.Model):
-    user=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
+    employee=models.ForeignKey(master_models.Employee, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
     sample_type=models.CharField(max_length=512, null=True, default='')
     collection_date=models.DateField(auto_created=False, auto_now=False)
     reg_date=models.DateField(auto_created=False, auto_now=False)

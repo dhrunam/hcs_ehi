@@ -1,0 +1,18 @@
+section{
+    padding-left: 18rem;
+    padding-right: 18rem;
+    margin-top: 2rem;
+}
+.row{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+mat-form-field{
+    width: 100%;
+    padding-left: 1rem
+}
+button{
+    float: right;
+}
