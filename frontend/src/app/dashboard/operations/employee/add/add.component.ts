@@ -115,6 +115,7 @@ export class AddComponent {
               test_details: [
                 {
                   id: e.id,
+                  health_record_id: this.health_record_id,
                   name:e.name,
                   value: data.value[`${e.id}`],
                   normal_min_value: e.normal_min_value,
@@ -130,7 +131,9 @@ export class AddComponent {
     }
   }
   onSubmitTestDetails(){
-    
+    // let fd = new FormData();
+    // fd.append('')
+    // this.healthRecordService.save_test_details()
   }
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();

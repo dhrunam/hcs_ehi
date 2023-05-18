@@ -23,7 +23,7 @@ class EmpHealthTestDetailsList(generics.ListCreateAPIView):
         test_details= json.loads(self.request.data['test_details'])
         if(profile_id and test_details):
             for item in test_details:
-                self.request.data['emp_health_profile_test']=profile_id
+                self.request.data['emp_health_profile_test']=item.health_record_id
                 self.request.data['medical_test']=item.id
                 self.request.data['medical_test_result']=item.value
                 self.request.data['normal_min_value']=item.normal_min_value
