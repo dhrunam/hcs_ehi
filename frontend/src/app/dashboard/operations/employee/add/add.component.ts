@@ -13,12 +13,18 @@ interface Employee{
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
+  date!: Date;
+  tests: Array<any> = [];
+  sessions: Array<any> = [];
   employee: Employee = { id: 0, name: ''};
   employees: Array<any> = [];
   filteredEmployees!: Observable<any[]>;
+  displayedColumns = ['sno','test_name','result','range'];
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
     this.getEmployees();
+    this.date = new Date();
+    this.getSessions(this.date.getFullYear().toString());
   }
   getEmployees(){
     this.employeeService.get_employees().subscribe({
@@ -26,6 +32,17 @@ export class AddComponent {
         this.employees = data.results;
       }
     })
+  }
+  getSessions(year: string){
+    this.healthRecordService.get_sessions(year).subscribe({
+      next: data => { 
+        this.sessions = data.results;
+      },
+    })
+  }
+  getTests(id: any){
+    this.tests = [];
+    this.tests = this.sessions.find(session => session.id === id.value).related_profiles;
   }
   onSearchEmployee(key:string){
     key.length >=2 ? this.filteredEmployees = of(this._filter(key)) : this.filteredEmployees = of([]);
@@ -41,16 +58,15 @@ export class AddComponent {
       let collection_date = new Date(data.value.collection_date);
       let registration_date = new Date(data.value.registration_date);
       let fd = new FormData();
-      fd.append('user', this.employee.id.toString());
+      fd.append('employee', this.employee.id.toString());
       fd.append('collection_date', `${collection_date.getFullYear()}-${collection_date.getMonth() + 1 < 10 ? '0':''}${collection_date.getMonth()+1}-${collection_date.getDate() < 10 ? '0':''}${collection_date.getDate()}`);
       fd.append('reg_date', `${registration_date.getFullYear()}-${registration_date.getMonth() + 1 < 10 ? '0':''}${registration_date.getMonth()+1}-${registration_date.getDate() < 10 ? '0':''}${registration_date.getDate()}`);
       fd.append('location',data.value.location);
       fd.append('analyst', data.value.analyst);
       fd.append('ref_doctor', data.value.ref_doctor);
+      fd.append('medical_test_session', data.value.session);
       this.healthRecordService.save_draft(fd).subscribe({
-        next: data => {
-          console.log(data);
-        }
+        next: data => {}
       })
     }
   }
