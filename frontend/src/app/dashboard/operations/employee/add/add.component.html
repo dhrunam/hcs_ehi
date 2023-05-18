@@ -1,5 +1,4 @@
 <mat-stepper linear #stepper>
-  
     <mat-step [stepControl]="firstForm.control" label="Employee">
       <form #firstForm="ngForm" (ngSubmit)="onSaveDraft(firstForm)">
         <section>
@@ -61,7 +60,7 @@
               <input matInput type="text" name="analyst" ngModel #analyst="ngModel">
             </mat-form-field>
           </div>
-          <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
         </section>
       </form>
     </mat-step>
@@ -93,20 +92,25 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-      <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
+      <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext type="submit">Next</button>
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
       </form>
     </mat-step>
   <mat-step label="Preview">
     <section class="preview">
       <app-preview [details]="employee_details"></app-preview>
-      <button mat-raised-button color="primary" matStepperNext type="submit" (click)="onSubmitTestDetails()">Next</button>
+      <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext (click)="onSubmitTestDetails()">Next</button>
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
     </section>
   </mat-step>
   <mat-step label="Done">
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div class="wrapper" *ngIf="showAck">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
     </div>
+    <h3 style="text-align: center;">Health Record for employee {{ employee.name }} has been successfully submitted</h3>
+    <h4 style="text-align: center; margin-top: 1rem; color: #3f51b5; text-decoration: underline; cursor: pointer;" matStepperNext (click)="stepper.reset(); showAck = false">Click Here to go back</h4>
   </mat-step>
 </mat-stepper>

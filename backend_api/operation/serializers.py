@@ -28,6 +28,7 @@ class EmpHealthTestDetailsSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'emp_health_profile_test',
+            'medical_test_profile',
             'medical_test',
             'medical_test_result',
             'normal_min_value',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { Observable, of, take } from 'rxjs';
 import { EmployeeService } from 'src/app/dashboard/masters/employee/employee.service';
 import { HealthRecordService } from '../employee.service';
 interface Employee{
@@ -24,6 +24,8 @@ export interface EmployeeDetails{
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
+  showAck: boolean = false;
+  draftMode: boolean = false;
   date!: Date;
   tests: Array<any> = [];
   test_details: Array<any> = [];
@@ -71,6 +73,7 @@ export class AddComponent {
     else{
       let collection_date = new Date(data.value.collection_date);
       let registration_date = new Date(data.value.registration_date);
+      let observable: Observable<any>;
       let fd = new FormData();
       fd.append('employee', this.employee.id.toString());
       fd.append('collection_date', `${collection_date.getFullYear()}-${collection_date.getMonth() + 1 < 10 ? '0':''}${collection_date.getMonth()+1}-${collection_date.getDate() < 10 ? '0':''}${collection_date.getDate()}`);
@@ -79,8 +82,16 @@ export class AddComponent {
       fd.append('analyst', data.value.analyst);
       fd.append('ref_doctor', data.value.ref_doctor);
       fd.append('medical_test_session', data.value.session);
-      this.healthRecordService.save_draft(fd).subscribe({
+      if(this.draftMode){
+        fd.append('id', this.health_record_id.toString());
+        observable = this.healthRecordService.update_draft(fd);
+      }
+      else{
+        observable = this.healthRecordService.save_draft(fd);
+      }
+      observable.pipe(take(1)).subscribe({
         next: response => {
+          // this.draftMode = true;
           this.health_record_id = response.id;
           this.employee_details = {
             name: this.employees.find(e => e.id === this.employee.id).name,
@@ -114,7 +125,7 @@ export class AddComponent {
               profile_id: e.profile,
               test_details: [
                 {
-                  medical_test: e.id,
+                  id: e.id,
                   name:e.name,
                   value: data.value[`${e.id}`],
                   normal_min_value: e.normal_min_value,
@@ -135,7 +146,7 @@ export class AddComponent {
     fd.append('health_record_id', this.health_record_id.toString());
     this.healthRecordService.save_test_details(fd).subscribe({
       next: data => {
-        console.log(data);
+        this.showAck = true;
       }
     })
   }
