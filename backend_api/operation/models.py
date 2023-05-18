@@ -20,8 +20,9 @@ class EmpHealthProfileTest(models.Model):
     created_at= models.DateTimeField(auto_created=True, auto_now=True)
 
 
-class EmpHealthTestDetails(models.Model):
+class  EmpHealthTestDetails(models.Model):
     emp_health_profile_test=models.ForeignKey(EmpHealthProfileTest,null=False, on_delete=models.CASCADE, related_name='emp_health_test_details')
+    medical_test_profile= models.ForeignKey(master_models.MedicalTestProfile, null=True, on_delete=models.SET_NULL, related_name='emp_health_test_details')
     medical_test=models.ForeignKey(master_models.MedicalTest, null=False, on_delete=models.CASCADE, related_name='emp_health_test_details')
     medical_test_result=models.CharField(max_length=256, null=True, default='')
     normal_min_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)

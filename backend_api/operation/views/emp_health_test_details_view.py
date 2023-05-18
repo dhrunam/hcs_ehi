@@ -19,20 +19,30 @@ class EmpHealthTestDetailsList(generics.ListCreateAPIView):
     @transaction.atomic()
     def perform_create(self, serializer):
         
-        profile_id = self.request.data['profile_id']
-        test_details= json.loads(self.request.data['test_details'])
-        if(profile_id and test_details):
-            for item in test_details:
-                self.request.data['emp_health_profile_test']=item.health_record_id
-                self.request.data['medical_test']=item.id
-                self.request.data['medical_test_result']=item.value
-                self.request.data['normal_min_value']=item.normal_min_value
-                self.request.data['normal_max_value']=item.normal_max_value
-                self.request.data['unit']=item.unit
+        health_record_id = self.request.data['health_record_id']
 
-                serializer.save()
+        data= json.loads(self.request.data['data'])
+        print('Request Data: ',data, health_record_id)
+        if(data and health_record_id):
+            for item in data:
+                test_details=item.test_details
+                profile_id = item.profile_id
 
-        queryset = op_models.EmpHealthTestDetails.objects.filter(emp_health_profile_test=profile_id).order_by('id')
+                if test_details:
+                    
+                    for test in test_details:
+                        
+                        self.request.data['emp_health_profile_test']=health_record_id
+                        self.request.data['medical_test']=test.id
+                        self.request.data['medical_test_profile']=profile_id
+                        self.request.data['medical_test_result']=test.value
+                        self.request.data['normal_min_value']=test.normal_min_value
+                        self.request.data['normal_max_value']=test.normal_max_value
+                        self.request.data['unit']=test.unit
+
+                        serializer.save()
+
+        queryset = op_models.EmpHealthTestDetails.objects.filter(emp_health_profile_test=health_record_id).order_by('id')
 
         return queryset
         
