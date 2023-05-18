@@ -3,6 +3,11 @@ section{
     padding-right: 18rem;
     margin-top: 2rem;
 }
+.preview{
+    padding-left: 10rem;
+    padding-right: 10rem;
+    margin-top: 2rem;
+}
 .row{
     margin-top: 1rem;
     display: flex;

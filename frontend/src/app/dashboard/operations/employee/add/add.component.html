@@ -65,8 +65,8 @@
         </section>
       </form>
     </mat-step>
-  <form #secondForm="ngForm">
-    <mat-step label="Health Records" [stepControl]="secondForm.controls['second_form']" ngModelGroup="second_form">
+    <mat-step label="Health Records" [stepControl]="secondForm.control">
+      <form #secondForm="ngForm" (ngSubmit)="addTestDetails(secondForm)">
       <div *ngFor="let r of tests">
         <h4>PROFILE: {{r.related_test_profile.name}}</h4>
         <mat-divider></mat-divider>
@@ -82,7 +82,7 @@
           <ng-container matColumnDef="result">
             <th mat-header-cell *matHeaderCellDef> Result </th>
             <td mat-cell *matCellDef="let element">
-                <input style="width:15%" type="number" required ngModel [name]="element.name"> {{ element.unit }}
+                <input style="width:15%" type="number" required ngModel [name]="element.id"> {{ element.unit }}
             </td>
           </ng-container>
           <ng-container matColumnDef="range">
@@ -94,14 +94,13 @@
         </table>
       </div>
       <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
+      </form>
     </mat-step>
-  </form>
   <mat-step label="Preview">
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <section class="preview">
+      <app-preview [details]="employee_details"></app-preview>
+      <button mat-raised-button color="primary" matStepperNext type="submit" (click)="onSubmitTestDetails()">Next</button>
+    </section>
   </mat-step>
   <mat-step label="Done">
     <p>You are now done.</p>
