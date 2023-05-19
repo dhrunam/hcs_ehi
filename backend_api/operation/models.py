@@ -24,7 +24,7 @@ class EmpHealthProfileTest(models.Model):
     is_entry_completed=models.BooleanField(default=False)
     created_by= models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     created_at= models.DateTimeField(auto_created=True, auto_now=True)
-
+    
 # def get_report_upload_path(instance, filename):
 #     # Generate the dynamic path based on the instance and filename
 #     # For example, you can use the instance's ID and the original filename
@@ -45,8 +45,6 @@ class  EmpHealthTestDetails(models.Model):
 class EmpHealthTestReports(models.Model):
         emp_health_profile_test=models.ForeignKey(EmpHealthProfileTest,null=False, on_delete=models.CASCADE, related_name='emp_health_test_report')
         report_name = models.CharField(max_length=256, null=True)
-        # report_url = models.FileField(upload_to='reports/', null=True, blank=True)
-
         report_url = models.FileField(upload_to= FilePathManager.get_file_path_to_upload_health_test_report, null=True, blank=True)
      
  

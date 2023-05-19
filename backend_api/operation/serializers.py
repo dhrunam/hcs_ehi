@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from operation import models as op_models
+# import magic
 
 
 class EmpHealthTestDetailsSerializer(serializers.ModelSerializer):
@@ -30,6 +31,28 @@ class EmpHealthTestReportsSerializer(serializers.ModelSerializer):
             'report_url',
 
         )
+    
+    # def validate_report_url(self, value):
+    #     file_extension = value.name.split('.')[-1].lower()
+
+    #     # Allowed file extensions
+    #     allowed_extensions = ['pdf']
+
+    #     if file_extension not in allowed_extensions:
+    #         raise serializers.ValidationError("Invalid file type. Only PDF files are allowed.")
+
+       
+    #     mime_type = magic.from_buffer(value.read(), mime=True)
+
+    #     # Allowed MIME types
+    #     allowed_mime_types = ['application/pdf']
+
+    #     if mime_type not in allowed_mime_types:
+    #         raise serializers.ValidationError("Invalid file type. Only PDF files are allowed.")
+
+    #     return value
+
+
 
 
 class EmpHealthProfileTestSerializer(serializers.ModelSerializer):
