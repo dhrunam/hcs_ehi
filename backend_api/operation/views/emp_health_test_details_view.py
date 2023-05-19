@@ -17,32 +17,32 @@ class EmpHealthTestDetailsList(generics.ListCreateAPIView):
         return queryset
     @transaction.atomic()
     def post(self, request, *args, **kwargs):
-        
+        request.data._mutable = True
         health_record_id = self.request.data['health_record_id']
 
         data= json.loads(self.request.data['data'])
-        print('Request Data: ',data)
         if(data and health_record_id):
             for item in data:
-                test_details=item.test_details
-                profile_id = item.profile_id
-
+                test_details=item['test_details']
+                profile_id = item['profile_id']
                 if test_details:
                     
                     for test in test_details:
                         
                         self.request.data['emp_health_profile_test']=health_record_id
-                        self.request.data['medical_test']=test.id
+                        self.request.data['medical_test']=test['id']
                         self.request.data['medical_test_profile']=profile_id
-                        self.request.data['medical_test_result']=test.value
-                        self.request.data['normal_min_value']=test.normal_min_value
-                        self.request.data['normal_max_value']=test.normal_max_value
-                        self.request.data['unit']=test.unit
+                        self.request.data['medical_test_result']=test['value']
+                        self.request.data['normal_min_value']=test['normal_min_value']
+                        self.request.data['normal_max_value']=test['normal_max_value']
+                        self.request.data['unit']=test['unit']
 
                         results= self.create(request, *args, **kwargs)
 
+        request.data._mutable = False
 
-        queryset = op_models.EmpHealthTestDetails.objects.filter(emp_health_profile_test=profile_id).order_by('id')
+        op_models.EmpHealthProfileTest.objects.filter(id=health_record_id).update(is_entry_completed = True)
+        queryset = op_models.EmpHealthTestDetails.objects.filter(emp_health_profile_test=health_record_id).order_by('id')
         serializer = self.get_serializer(queryset, many=True)
         return response.Response(serializer.data, status=status.HTTP_201_CREATED)
 

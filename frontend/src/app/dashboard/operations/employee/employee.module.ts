@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from './add/add.component';
 import { ViewComponent } from './view/view.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { PreviewComponent } from './preview/preview.component';
 const routes: Routes = [
   { path: '', component: EmployeeComponent,
     children: [
@@ -30,6 +31,7 @@ export const MY_DATE_FORMATS = {
     EmployeeComponent,
     AddComponent,
     ViewComponent,
+    PreviewComponent,
   ],
   imports: [
     MaterialModule,
