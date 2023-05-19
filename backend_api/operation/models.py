@@ -45,7 +45,9 @@ class  EmpHealthTestDetails(models.Model):
 class EmpHealthTestReports(models.Model):
         emp_health_profile_test=models.ForeignKey(EmpHealthProfileTest,null=False, on_delete=models.CASCADE, related_name='emp_health_test_report')
         report_name = models.CharField(max_length=256, null=True)
-        report_url = models.FileField(upload_to= FilePathManager.get_file_path, null=True, blank=True)
+        # report_url = models.FileField(upload_to='reports/', null=True, blank=True)
+
+        report_url = models.FileField(upload_to= FilePathManager.get_file_path_to_upload_health_test_report, null=True, blank=True)
      
  
 

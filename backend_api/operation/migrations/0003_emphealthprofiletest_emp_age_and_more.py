@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('report_name', models.CharField(max_length=256, null=True)),
-                ('report_url', models.FileField(blank=True, null=True, upload_to=common.utility.file_path_manager.FilePathManager.get_file_path)),
+                ('report_url', models.FileField(blank=True, null=True, upload_to=common.utility.file_path_manager.FilePathManager.get_file_path_to_upload_health_test_report)),
                 ('emp_health_profile_test', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='emp_health_test_report', to='operation.emphealthprofiletest')),
             ],
         ),

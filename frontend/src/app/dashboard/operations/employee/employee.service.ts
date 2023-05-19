@@ -13,9 +13,12 @@ export class HealthRecordService{
     return this.http.post<any>(`${URL}/operation/health_profile_test`, fd);
   }
   update_draft(fd: FormData){
-    return this.http.put<any>(`${URL}/operation/health_profile_test`, fd);
+    return this.http.put<any>(`${URL}/operation/health_profile_test/${fd.get('id')}`, fd);
   }
   save_test_details(fd: FormData){
     return this.http.post(`${URL}/operation/health_test`, fd);
+  }
+  upload_reports(fd: FormData){
+    return this.http.post(`${URL}/operation/health_test/upload/report`,fd);
   }
 }

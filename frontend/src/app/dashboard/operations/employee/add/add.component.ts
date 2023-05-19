@@ -93,7 +93,7 @@ export class AddComponent {
       }
       observable.pipe(take(1)).subscribe({
         next: response => {
-          // this.draftMode = true;
+          this.draftMode = true;
           this.health_record_id = response.id;
           this.employee_details = {
             name: this.employees.find(e => e.id === this.employee.id).name,
@@ -155,7 +155,17 @@ export class AddComponent {
     })
   }
   upload(event: any){
-    console.log(event);
+    if(event.target.files){
+      let fd = new FormData();
+      fd.append('emp_health_profile_test',this.health_record_id.toString());
+      fd.append('report_url', event.target.files[0]);
+      fd.append('report_name', event.target.files[0].name);
+      this.healthRecordService.upload_reports(fd).subscribe({
+        next: data => {
+          console.log(data);
+        }
+      })
+    }
   }
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();

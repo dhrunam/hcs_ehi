@@ -19,9 +19,11 @@ class EmpHealthTestReportsList(generics.ListCreateAPIView):
                     request.data['report_url'].name = request.data.get(
                         'report_name') + '.'+file_name_parts[len(file_name_parts)-1]
 
-        request.data._mutable = False
 
+        
+        print(request.data)
         response = self.create(request, *args, **kwargs)
+        request.data._mutable = False
         return response
     
     def get_queryset(self):
