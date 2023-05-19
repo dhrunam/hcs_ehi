@@ -13,8 +13,6 @@
                 <mat-option *ngFor="let s of sessions" [value]="s.id" >{{s.session}}</mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
-          <div class="row">
             <mat-form-field>
               <mat-label> Employee</mat-label>
               <input type="text"
@@ -31,9 +29,19 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+          </div>
+          <div class="row">
             <mat-form-field>
               <mat-label>Location</mat-label>
               <input matInput type="text" name="location" ngModel #location="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Ref. Dr.</mat-label>
+              <input matInput type="text" name="ref_doctor" ngModel #ref_doctor="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Sample Type</mat-label>
+              <input matInput type="text" name="sample_type" ngModel #sample_type="ngModel">
             </mat-form-field>
           </div>
           <div class="row">
@@ -48,12 +56,6 @@
               <input matInput [matDatepicker]="picker2" name="registration_date" ngModel #registration_date="ngModel" required>
               <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <mat-form-field>
-              <mat-label>Ref. Dr.</mat-label>
-              <input matInput type="text" name="ref_doctor" ngModel #ref_doctor="ngModel">
             </mat-form-field>
             <mat-form-field>
               <mat-label>Analyst</mat-label>
@@ -93,24 +95,38 @@
         </table>
       </div>
       <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext type="submit">Next</button>
-      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
       </form>
     </mat-step>
-  <mat-step label="Preview">
-    <section class="preview">
-      <app-preview [details]="employee_details"></app-preview>
-      <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext (click)="onSubmitTestDetails()">Next</button>
-      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-    </section>
-  </mat-step>
-  <mat-step label="Done">
-    <div class="wrapper" *ngIf="showAck">
-      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <mat-step label="Upload Documents" [stepControl]="thirdForm.control">
+      <section class="preview">
+        <form #thirdForm="ngForm">
+          <mat-form-field>
+            <mat-label>Doctor Remarks</mat-label>
+            <textarea matInput rows="3" name="doctors_remarks" ngModel #doctors_remarks="ngModel" required></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
+          <button mat-raised-button color="primary" type="button" style="margin-right: 1rem; margin-left: 1rem;" matStepperPrevious>Go Back</button>
+          <button mat-raised-button color="primary" (click)="uploadFile.click()" type="button">Upload Reports</button>
+          <input #uploadFile accept="application/pdf" (change)="upload($event)" type='file' style="display:none"/> 
+        </form>
+      </section>
+    </mat-step>
+    <mat-step label="Preview">
+      <section class="preview">
+        <app-preview [details]="employee_details"></app-preview>
+        <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext (click)="onSubmitTestDetails()">Next</button>
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      </section>
+    </mat-step>
+    <mat-step label="Done">
+      <div class="wrapper" *ngIf="showAck">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
           <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-      </svg>
-    </div>
-    <h3 style="text-align: center;">Health Record for employee {{ employee.name }} has been successfully submitted</h3>
-    <h4 style="text-align: center; margin-top: 1rem; color: #3f51b5; text-decoration: underline; cursor: pointer;" matStepperNext (click)="stepper.reset(); showAck = false">Click Here to go back</h4>
-  </mat-step>
+        </svg>
+      </div>
+      <h3 style="text-align: center;">Health Record for employee {{ employee.name }} has been successfully submitted</h3>
+      <h4 style="text-align: center; margin-top: 1rem; color: #3f51b5; text-decoration: underline; cursor: pointer;" matStepperNext (click)="stepper.reset(); showAck = false">Click Here to go back</h4>
+    </mat-step>
 </mat-stepper>

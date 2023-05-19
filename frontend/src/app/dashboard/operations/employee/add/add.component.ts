@@ -16,6 +16,7 @@ export interface EmployeeDetails{
   analyst: string;
   ref_doctor: string;
   medical_test_session: string;
+  sample_type:string;
   test_details?: Array<any>;
 }
 @Component({
@@ -82,6 +83,7 @@ export class AddComponent {
       fd.append('analyst', data.value.analyst);
       fd.append('ref_doctor', data.value.ref_doctor);
       fd.append('medical_test_session', data.value.session);
+      fd.append('sample_type', data.value.sample_type);
       if(this.draftMode){
         fd.append('id', this.health_record_id.toString());
         observable = this.healthRecordService.update_draft(fd);
@@ -101,7 +103,9 @@ export class AddComponent {
             location: data.value.location,
             ref_doctor: data.value.ref_doctor,
             analyst: data.value.analyst,
-            medical_test_session: this.sessions.find(s => s.id === data.value.session).year,
+            sample_type: data.value.sample_type,
+            medical_test_session: this.sessions.find(s => s.id === data.value.session).session,
+            
           }
         }
       })
@@ -149,6 +153,9 @@ export class AddComponent {
         this.showAck = true;
       }
     })
+  }
+  upload(event: any){
+    console.log(event);
   }
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
