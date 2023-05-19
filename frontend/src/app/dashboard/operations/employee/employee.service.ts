@@ -21,4 +21,7 @@ export class HealthRecordService{
   upload_reports(fd: FormData){
     return this.http.post(`${URL}/operation/health_test/upload/report`,fd);
   }
+  get_reports(id: number){
+    return this.http.get<any>(`${URL}/operation/health_profile_test/${id}`);
+  }
 }

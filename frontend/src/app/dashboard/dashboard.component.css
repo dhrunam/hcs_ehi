@@ -32,6 +32,9 @@ main{
     margin-top: -10px;
     font-size: 2rem;
 }
+.report{
+    margin-bottom: 1rem;
+}
 img{
     display: block;
     margin-right: auto;

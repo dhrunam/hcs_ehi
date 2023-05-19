@@ -35,7 +35,10 @@ export class AddComponent {
   employee: Employee = { id: 0, name: ''};
   employees: Array<any> = [];
   health_record_id: number = 0;
+  file!: { file: any, filename: string };
   filteredEmployees!: Observable<any[]>;
+  reports: Array<any> = [];
+  reportsColumns = ['sno','report_name','report_file','operation']
   displayedColumns = ['sno','test_name','result','range'];
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
@@ -156,16 +159,26 @@ export class AddComponent {
   }
   upload(event: any){
     if(event.target.files){
-      let fd = new FormData();
-      fd.append('emp_health_profile_test',this.health_record_id.toString());
-      fd.append('report_url', event.target.files[0]);
-      fd.append('report_name', event.target.files[0].name);
-      this.healthRecordService.upload_reports(fd).subscribe({
-        next: data => {
-          console.log(data);
-        }
-      })
+      this.file = { file: event.target.files[0], filename: event.target.files[0].name}
     }
+  }
+  uploadDocument(report_name: string){
+    let fd = new FormData();
+    fd.append('emp_health_profile_test', this.health_record_id.toString());
+    fd.append('report_name', report_name);
+    fd.append('report_url', this.file.file);
+    this.healthRecordService.upload_reports(fd).subscribe({
+      next: data => {
+        this.getDocuments(this.health_record_id);
+      }
+    })
+  }
+  getDocuments(id:number){
+    this.healthRecordService.get_reports(id).subscribe({
+      next: data => {
+        this.reports = data.related_emp_health_tests_reports
+      }
+    })
   }
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
