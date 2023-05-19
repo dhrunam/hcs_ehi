@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'masters',
     'configuration',
     'operation',
+    'common',
 ]
 
 MIDDLEWARE = [
