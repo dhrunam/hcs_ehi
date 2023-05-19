@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from operation import models as op_models
-import magic
+# import magic
 
 
 class EmpHealthTestDetailsSerializer(serializers.ModelSerializer):

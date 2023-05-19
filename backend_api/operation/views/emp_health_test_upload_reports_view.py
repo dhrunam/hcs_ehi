@@ -18,9 +18,8 @@ class EmpHealthTestReportsList(generics.ListCreateAPIView):
                 if len(file_name_parts) > 1:
                     request.data['report_url'].name = request.data.get(
                         'report_name') + '.'+file_name_parts[len(file_name_parts)-1]
-
         
-
+        print(request.data)
         response = self.create(request, *args, **kwargs)
 
         op_models.EmpHealthProfileTest.objects.filter(

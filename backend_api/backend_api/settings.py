@@ -15,6 +15,7 @@ from pathlib import Path
 from datetime import timedelta
 
 from rest_framework.settings import api_settings
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,6 +149,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL= 'api/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
 #     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),

@@ -20,5 +20,7 @@ class EmpHealthProfileTestDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = op_serializers.EmpHealthProfileTestSerializer
 
     def perform_update(self, serializer):
+        self.request.data._mutable = True
         self.request.data['created_by']= self.request.user.id
+        self.request.data._mutable = False
         return super().perform_update(serializer)
