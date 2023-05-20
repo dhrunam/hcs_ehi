@@ -24,3 +24,8 @@ class EmpHealthProfileTestDetails(generics.RetrieveUpdateDestroyAPIView):
         self.request.data['created_by']= self.request.user.id
         self.request.data._mutable = False
         return super().perform_update(serializer)
+    
+    def patch(self, request, *args, **kwargs):
+        
+        return self.partial_update(request, *args, **kwargs)    
+    

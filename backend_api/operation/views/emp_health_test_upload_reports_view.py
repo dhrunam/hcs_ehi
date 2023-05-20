@@ -22,8 +22,8 @@ class EmpHealthTestReportsList(generics.ListCreateAPIView):
         print(request.data)
         response = self.create(request, *args, **kwargs)
 
-        op_models.EmpHealthProfileTest.objects.filter(
-             id=request.data['emp_health_profile_test']).update(emp_remarks=request.data['emp_remarks'])
+        # op_models.EmpHealthProfileTest.objects.filter(
+        #      id=request.data['emp_health_profile_test']).update(emp_remarks=request.data['emp_remarks'])
         
         request.data._mutable = False
         return response
