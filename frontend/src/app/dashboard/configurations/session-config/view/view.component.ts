@@ -8,6 +8,7 @@ import { SessionConfigService } from '../session-config.service';
 })
 export class ViewComponent {
   sessions: Array<any> = [];
+  displayedColumns = ['sno', 'year', 'session', 'operation'];
   constructor(private sessionConfigService: SessionConfigService){}
   ngOnInit(): void{
     this.getSessions();

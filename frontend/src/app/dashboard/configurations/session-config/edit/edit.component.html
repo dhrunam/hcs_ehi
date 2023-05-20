@@ -2,15 +2,42 @@
     <h3>{{ editMode ? 'Edit Session' : 'Add Session'}}</h3>
 </header>
 <mat-divider></mat-divider>
-<div class="row">
-    <mat-form-field appearance="outline">
-        <mat-label>Date of Entry in Service</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedYear" name="emp_does" ngModel #emp_does="ngModel" required>
-        <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-        <mat-datepicker #picker startView="multi-year" (yearSelected)="chosenYearHandler($event)"></mat-datepicker>
-        <!-- <mat-error *ngIf="emp_does.touched && emp_does.invalid">Please select Date of Entry in Service</mat-error> -->
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label></mat-label>
-    </mat-form-field>
-</div>
+<form #session="ngForm" (ngSubmit)="onSubmit(session)">
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Select Year</mat-label>
+            <input matInput [matDatepicker]="picker" [ngModel]="selectedYear || session_details.year" name="year" #year="ngModel" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year" (yearSelected)="chosenYearHandler($event)"></mat-datepicker>
+            <!-- <mat-error *ngIf="emp_does.touched && emp_does.invalid">Please select Date of Entry in Service</mat-error> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Select Session</mat-label>
+            <mat-select name="session" [ngModel]="session_details.session" #session="ngModel" required>
+                <mat-option value="First Half">First Half</mat-option>
+                <mat-option value="Second Half">Second Half</mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="emp_does.touched && emp_does.invalid">Please select Date of Entry in Service</mat-error> -->
+        </mat-form-field>
+    </div>
+    <section>
+        <mat-card [ngClass]="{'error': showError, '': !showError}">
+            <mat-card-header>
+                <label>Profile(s)</label>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+                <div class="check-all">
+                    <mat-checkbox color="warn" [checked]="select_all" (change)="selectAll($event.checked)">Select All</mat-checkbox>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="profiles">
+                    <mat-checkbox color="primary" name="profiles" *ngFor="let p of profiles; let i=index" [checked]="p.completed" (change)="updateSelectAll($event, p.id)">{{ p.name }}</mat-checkbox>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </section>
+    <mat-error *ngIf="showError">Please select profiles before proceeding</mat-error>
+    <button mat-raised-button color="primary">{{ editMode ? 'Update' : 'Submit'}}</button>
+</form>
+

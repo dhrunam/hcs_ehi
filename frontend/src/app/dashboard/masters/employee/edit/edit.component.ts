@@ -75,7 +75,7 @@ export class EditComponent {
       }
       observable.pipe(take(1)).subscribe({
         next: data => {
-          this.router.navigate(['/dashboard/masters/medical-test/view']);
+          this.router.navigate(['/dashboard/masters/employee/view']);
         }
       })
     }

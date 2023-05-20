@@ -14,7 +14,7 @@
                 <span>Masters</span>
             </mat-label>
             <div class="icon" #elem1 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
-                <mat-icon>keyboard_arrow_up</mat-icon>
+                <mat-icon>chevron_right</mat-icon>
             </div>
         </div>
         <ul class="sub-menu" #elem2 [ngClass]="{'active': toggleKey === 'masters', '': toggleKey !== 'masters' && toggle}">
@@ -36,12 +36,6 @@
                     <span>Section</span>
                 </label>
             </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/designation" routerLinkActive="active" (click)="onToggleKey('masters')">
-                <label>
-                    <mat-icon>card_membership</mat-icon>
-                    <span>Designation</span>
-                </label>
-            </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/empgroup" routerLinkActive="active">
                 <label>
                     <mat-icon>groups_2</mat-icon>
@@ -54,19 +48,25 @@
                     <span>Employee Type</span>
                 </label>
             </li>
+            <li class="sub-menu-item" routerLink="/dashboard/masters/designation" routerLinkActive="active" (click)="onToggleKey('masters')">
+                <label>
+                    <mat-icon>card_membership</mat-icon>
+                    <span>Designation</span>
+                </label>
+            </li>
             <li class="sub-menu-item" routerLink="/dashboard/masters/employee" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>person</mat-icon>
                     <span>Employee</span>
                 </label>
             </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test-profile/view" routerLinkActive="active" (click)="onToggleKey('masters')">
+            <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test-profile" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>colorize</mat-icon>
                     <span>Test Profile</span>
                 </label>
             </li>
-            <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test/view" routerLinkActive="active" (click)="onToggleKey('masters')">
+            <li class="sub-menu-item" routerLink="/dashboard/masters/medical-test" routerLinkActive="active" (click)="onToggleKey('masters')">
                 <label>
                     <mat-icon>fingerprint</mat-icon>
                     <span>Medical Test</span>
@@ -81,7 +81,7 @@
                 <span>Configurations</span>
             </mat-label>
             <div class="icon" #elem3 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">
-                <mat-icon>keyboard_arrow_up</mat-icon>
+                <mat-icon>chevron_right</mat-icon>
             </div>
         </div>
         <ul class="sub-menu" #elem4 [ngClass]="{'active': toggleKey === 'configurations', '': toggleKey !== 'configurations' && toggle}">

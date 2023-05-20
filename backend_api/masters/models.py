@@ -75,7 +75,7 @@ class MedicalTest(models.Model):
     is_deleted=models.BooleanField(default=False);
 
 class EmpSection(models.Model):
-    empname = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name='medical_test')
+    empname = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name='emp_session')
 
 
 

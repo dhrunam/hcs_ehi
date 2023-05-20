@@ -29,6 +29,18 @@ class MedicalTestSessionList(generics.ListCreateAPIView):
         
         return instance
     
+    def get_queryset(self):
+        queryset= conf_models.MedicalTestSession.objects.all().order_by('-id')
+        year=self.request.query_params.get('year')
+
+        if year:
+            queryset=queryset.filter(year=year)
+        
+        return queryset
+
+
+       
+    
 
 class MedicalTestSessionDetails(generics.RetrieveUpdateAPIView):
     queryset= conf_models.MedicalTestSession

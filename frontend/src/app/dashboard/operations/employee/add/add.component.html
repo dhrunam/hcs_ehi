@@ -1,0 +1,170 @@
+<mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstForm.control" label="Employee">
+      <form #firstForm="ngForm" (ngSubmit)="onSaveDraft(firstForm)">
+        <section>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Year</mat-label>
+              <input matInput type="text" [value]="date.getFullYear()" disabled>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Session</mat-label>
+              <mat-select name="session" ngModel #session="ngModel" required (selectionChange)="getTests($event)">
+                <mat-option *ngFor="let s of sessions" [value]="s.id" >{{s.session}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label> Employee</mat-label>
+              <input type="text"
+                    matInput
+                    [matAutocomplete]="auto"
+                    (keyup)="onSearchEmployee(emp_key.value)"
+                    name="emp_key"
+                    [ngModel]="employee.name"
+                    #emp_key="ngModel"
+                    required>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let emp of filteredEmployees | async" [value]="emp.id" (click)="onSelectEmployee({id: emp.id, name: emp.name})">
+                  {{emp.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Location</mat-label>
+              <input matInput type="text" name="location" ngModel #location="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Ref. Dr.</mat-label>
+              <input matInput type="text" name="ref_doctor" ngModel #ref_doctor="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Sample Type</mat-label>
+              <input matInput type="text" name="sample_type" ngModel #sample_type="ngModel">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Sample Collection Date</mat-label>
+              <input matInput [matDatepicker]="picker1" name="collection_date" ngModel #collection_date="ngModel" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Sample Registration Date</mat-label>
+              <input matInput [matDatepicker]="picker2" name="registration_date" ngModel #registration_date="ngModel" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Analyst</mat-label>
+              <input matInput type="text" name="analyst" ngModel #analyst="ngModel">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </section>
+      </form>
+    </mat-step>
+    <mat-step label="Health Records" [stepControl]="secondForm.control">
+      <form #secondForm="ngForm" (ngSubmit)="addTestDetails(secondForm)">
+      <div *ngFor="let r of tests">
+        <h4>PROFILE: {{r.related_test_profile.name}}</h4>
+        <mat-divider></mat-divider>
+        <table mat-table [dataSource]="r.related_test_profile.related_tests">
+          <ng-container matColumnDef="sno">
+            <th mat-header-cell *matHeaderCellDef> S.No. </th>
+            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+          </ng-container>
+          <ng-container matColumnDef="test_name">
+            <th mat-header-cell *matHeaderCellDef> Test </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef> Result </th>
+            <td mat-cell *matCellDef="let element">
+                <input style="width:15%" type="number" required ngModel [name]="element.id"> {{ element.unit }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="range">
+            <th mat-header-cell *matHeaderCellDef> Normal Range </th>
+            <td mat-cell *matCellDef="let element"> {{element.normal_min_value}} - {{element.normal_max_value}} {{element.unit}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext type="submit">Next</button>
+      <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
+      </form>
+    </mat-step>
+    <mat-step label="Upload Documents" [stepControl]="thirdForm.control">
+      <section class="preview">
+        <div class="upload">
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Report Name</mat-label>
+              <input matInput name="report_name" ngModel #report_name="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <input [ngModel]="file && file.filename" matInput readonly placeholder="Upload File">
+              <button mat-icon-button matSuffix type="button" (click)="uploadFile.click()">
+                <mat-icon color="primary">attachment</mat-icon>
+            </button>
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="margin-left: 1rem;" (click)="uploadDocument(report_name.value)">Upload</button>
+          </div>  
+        </div>
+        <table mat-table [dataSource]="reports" class="reports">
+            <ng-container matColumnDef="sno">
+              <th mat-header-cell *matHeaderCellDef> S.No. </th>
+              <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+            </ng-container>
+            <ng-container matColumnDef="report_name">
+              <th mat-header-cell *matHeaderCellDef> Report Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.report_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="report_file">
+              <th mat-header-cell *matHeaderCellDef> Report </th>
+              <td mat-cell *matCellDef="let element"><a href="{{element.report_url}}" target="_blank">View</a></td>
+            </ng-container>
+            <ng-container matColumnDef="operation">
+              <th mat-header-cell *matHeaderCellDef> Delete </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" aria-label="Example icon button with a menu icon">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="reportsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: reportsColumns;"></tr>
+        </table>
+        <form #thirdForm="ngForm">
+          <mat-form-field>
+            <mat-label>Doctor Remarks</mat-label>
+            <textarea matInput rows="3" name="doctors_remarks" ngModel #doctors_remarks="ngModel" required></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" matStepperNext type="submit">Next</button>
+          <button mat-raised-button color="primary" type="button" style="margin-right: 1rem; margin-left: 1rem;" matStepperPrevious>Go Back</button>
+          <input #uploadFile accept="application/pdf" (change)="upload($event)" type='file' style="display:none"/> 
+        </form>
+      </section>
+    </mat-step>
+    <mat-step label="Preview">
+      <section class="preview">
+        <app-preview [details]="employee_details"></app-preview>
+        <button mat-raised-button color="primary" style="margin-left: 0.5rem" matStepperNext (click)="onSubmitTestDetails()">Next</button>
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      </section>
+    </mat-step>
+    <mat-step label="Done">
+      <div class="wrapper" *ngIf="showAck">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+      <h3 style="text-align: center;">Health Record for employee {{ employee.name }} has been successfully submitted</h3>
+      <h4 style="text-align: center; margin-top: 1rem; color: #3f51b5; text-decoration: underline; cursor: pointer;" matStepperNext (click)="stepper.reset(); showAck = false">Click Here to go back</h4>
+    </mat-step>
+</mat-stepper>
