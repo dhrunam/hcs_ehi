@@ -139,7 +139,7 @@
             <tr mat-header-row *matHeaderRowDef="reportsColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: reportsColumns;"></tr>
         </table>
-        <form #thirdForm="ngForm">
+        <form #thirdForm="ngForm" (ngSubmit)="addRemarks(thirdForm)">
           <mat-form-field>
             <mat-label>Doctor Remarks</mat-label>
             <textarea matInput rows="3" name="doctors_remarks" ngModel #doctors_remarks="ngModel" required></textarea>

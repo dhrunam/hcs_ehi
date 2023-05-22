@@ -162,6 +162,21 @@ export class AddComponent {
       this.file = { file: event.target.files[0], filename: event.target.files[0].name}
     }
   }
+  addRemarks(data: NgForm){
+    if(!data.valid){
+      data.control.markAllAsTouched();
+    }
+    else{
+      let fd = new FormData();
+      fd.append('id', this.health_record_id.toString());
+      fd.append('emp_remarks', data.value.doctor_remarks);
+      this.healthRecordService.add_remarks(fd).subscribe({
+        next: data => {
+          console.log(data);
+        }
+      })
+    }
+  }
   uploadDocument(report_name: string){
     let fd = new FormData();
     fd.append('emp_health_profile_test', this.health_record_id.toString());
