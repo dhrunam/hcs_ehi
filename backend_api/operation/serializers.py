@@ -63,6 +63,8 @@ class EmpHealthProfileTestSerializer(serializers.ModelSerializer):
         fields= (
             'id',
             'employee',
+            'emp_age',
+            'emp_remarks',
             'medical_test_session',
             'sample_type',
             'collection_date',

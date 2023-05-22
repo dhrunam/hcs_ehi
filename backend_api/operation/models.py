@@ -13,7 +13,7 @@ import datetime
 class EmpHealthProfileTest(models.Model):
     employee=models.ForeignKey(master_models.Employee, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
     emp_age= models.IntegerField(default=0)
-    emp_remarks = models.CharField(max_length=512)
+    emp_remarks = models.CharField(max_length=512, null= True, default='')
     medical_test_session = models.ForeignKey(conf_models.MedicalTestSession, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
     sample_type=models.CharField(max_length=512, null=True, default='')
     collection_date=models.DateField(auto_created=False, auto_now=False)
