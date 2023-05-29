@@ -24,4 +24,10 @@ export class HealthRecordService{
   get_reports(id: number){
     return this.http.get<any>(`${URL}/operation/health_profile_test/${id}`);
   }
+  add_remarks(fd: FormData){
+    return this.http.patch(`${URL}/operation/health_profile_test/${fd.get('id')}`, fd);
+  }
+  delete_report(id:number){
+    return this.http.delete(`${URL}/operation/health_test/upload/report/${id}`);
+  }
 }

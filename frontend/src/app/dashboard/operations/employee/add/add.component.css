@@ -18,13 +18,14 @@ mat-form-field{
     width: 100%;
     padding-left: 1rem
 }
-button{
+.controls{
     float: right;
 }
-table{
+.alt{
     margin-top: 1rem;
 }
-.upload{
+.reports{
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 .wrapper{height: 100%;display:flex;justify-content:center;align-items:center;}

@@ -72,6 +72,7 @@ class EmpHealthProfileTestSerializer(serializers.ModelSerializer):
             'ref_doctor',
             'analyst',
             'location',
+            'emp_remarks',
             'is_entry_completed',
             'related_emp_health_test_details',
             'related_emp_health_tests_reports',

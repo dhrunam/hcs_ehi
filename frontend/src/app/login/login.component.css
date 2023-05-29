@@ -58,10 +58,10 @@ mat-error{
 }
 @media(max-width: 1261px){
     mat-card{
-        width: 30%;
+        width:30%;
     }
 }
-@media(max-width: 1000px){
+@media(max-width: 1120px){
     mat-card{
         width: 40%;
     }
