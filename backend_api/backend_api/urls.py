@@ -21,12 +21,14 @@ from account import urls as acc_urls
 from configuration import urls as conf_urls
 from operation import urls as op_urls
 
+
 urlpatterns = [
+
     path('api/', include(op_urls)),
     path('api/', include(conf_urls)),
     path('api/', include(master_urls)),
     path('api/', include(acc_urls)),
-    path('api/' , include(durin_urls)),
+    path('api/', include(durin_urls)),
     path('admin/', admin.site.urls),
 
 
