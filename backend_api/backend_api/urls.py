@@ -20,6 +20,8 @@ from masters import urls as master_urls
 from account import urls as acc_urls
 from configuration import urls as conf_urls
 from operation import urls as op_urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -33,4 +35,9 @@ urlpatterns = [
 
 
 
+
+
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URLS, document_root=settings.MEDIA_ROOT)
