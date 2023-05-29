@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable, of, take } from 'rxjs';
 import { EmployeeService } from 'src/app/dashboard/masters/employee/employee.service';
 import { HealthRecordService } from '../employee.service';
+import { MatDatepicker } from '@angular/material/datepicker';
 interface Employee{
   id:number;
   name:string;
@@ -18,6 +19,7 @@ export interface EmployeeDetails{
   medical_test_session: string;
   sample_type:string;
   test_details?: Array<any>;
+  patient_remarks?: string;
 }
 @Component({
   selector: 'app-add',
@@ -25,6 +27,8 @@ export interface EmployeeDetails{
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
+  @ViewChild('year_picker', { static: false }) picker!: MatDatepicker<Date>;
+  selectedYear: string = '';
   showAck: boolean = false;
   draftMode: boolean = false;
   date!: Date;
@@ -38,13 +42,20 @@ export class AddComponent {
   file!: { file: any, filename: string };
   filteredEmployees!: Observable<any[]>;
   reports: Array<any> = [];
-  reportsColumns = ['sno','report_name','report_file','operation']
+  // reportsColumns = ['sno','report_name','report_file','operation']
+  reportsColumns = ['sno','report_name','report_file'];
   displayedColumns = ['sno','test_name','result','range'];
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
     this.getEmployees();
     this.date = new Date();
-    this.getSessions(this.date.getFullYear().toString());
+  }
+  chosenYearHandler(ev:any){
+    let { _d } = ev;
+    this.selectedYear = _d;
+    let year = new Date(_d);
+    this.getSessions(year.getFullYear().toString());
+    this.picker.close()
   }
   getEmployees(){
     this.employeeService.get_employees().subscribe({
@@ -100,7 +111,7 @@ export class AddComponent {
           this.health_record_id = response.id;
           this.employee_details = {
             name: this.employees.find(e => e.id === this.employee.id).name,
-            year: this.date.getFullYear().toString(),
+            year: data.value.year,
             collection_date: `${collection_date.getDate() < 10 ? '0':''}${collection_date.getDate()}-${collection_date.getMonth() + 1 < 10 ? '0':''}${collection_date.getMonth()+1}-${collection_date.getFullYear()}`,
             registration_date: `${registration_date.getDate() < 10 ? '0':''}${registration_date.getDate()}-${registration_date.getMonth() + 1 < 10 ? '0':''}${registration_date.getMonth()+1}-${registration_date.getFullYear()}`,
             location: data.value.location,
@@ -108,7 +119,6 @@ export class AddComponent {
             analyst: data.value.analyst,
             sample_type: data.value.sample_type,
             medical_test_session: this.sessions.find(s => s.id === data.value.session).session,
-            
           }
         }
       })
@@ -162,12 +172,34 @@ export class AddComponent {
       this.file = { file: event.target.files[0], filename: event.target.files[0].name}
     }
   }
+  addRemarks(data: NgForm){
+    if(!data.valid){
+      data.control.markAllAsTouched();
+    }
+    else{
+      let fd = new FormData();
+      fd.append('id', this.health_record_id.toString());
+      fd.append('emp_remarks', data.value.doctors_remarks);
+      this.healthRecordService.add_remarks(fd).subscribe({
+        next: d => {
+          this.employee_details.patient_remarks = data.value.doctors_remarks;
+        }
+      })
+    }
+  }
   uploadDocument(report_name: string){
     let fd = new FormData();
     fd.append('emp_health_profile_test', this.health_record_id.toString());
     fd.append('report_name', report_name);
     fd.append('report_url', this.file.file);
     this.healthRecordService.upload_reports(fd).subscribe({
+      next: data => {
+        this.getDocuments(this.health_record_id);
+      }
+    })
+  }
+  deleteDocument(id:number){
+    this.healthRecordService.delete_report(id).subscribe({
       next: data => {
         this.getDocuments(this.health_record_id);
       }
