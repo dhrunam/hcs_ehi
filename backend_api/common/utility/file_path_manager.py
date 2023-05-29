@@ -18,7 +18,7 @@ class FilePathManager():
         if emp_health_profile_test:
             medical_test_session= conf_models.MedicalTestSession.objects.filter(id=emp_health_profile_test.medical_test_session.id).last()
             if medical_test_session:
-                path= path + f'{medical_test_session.year}/{medical_test_session.session}'
+                path= path + f'{medical_test_session.year}/{medical_test_session.session.replace(" ","_")}'
 
         path= path + f'/{filename}'
        
