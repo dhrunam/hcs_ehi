@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ehi_db',
         'USER': 'postgres',
-        'PASSWORD': 'Darkhorse@1',
+        'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432'
     }
