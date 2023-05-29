@@ -164,7 +164,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_CLASSES": ["durin.throttling.UserClientRateThrottle"],
     "DEFAULT_THROTTLE_RATES":{'user_per_client': '40/min'},
     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE':10
+    'PAGE_SIZE':1000
 }
 
 REST_DURIN = {
