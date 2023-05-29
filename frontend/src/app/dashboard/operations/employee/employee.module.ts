@@ -7,6 +7,7 @@ import { AddComponent } from './add/add.component';
 import { ViewComponent } from './view/view.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { PreviewComponent } from './preview/preview.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 const routes: Routes = [
   { path: '', component: EmployeeComponent,
     children: [
@@ -37,6 +38,7 @@ export const MY_DATE_FORMATS = {
     MaterialModule,
     RouterModule.forChild(routes),
     FormsModule,
+    SharedModule,
   ],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }

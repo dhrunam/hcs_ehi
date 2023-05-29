@@ -1,0 +1,36 @@
+<div class="backdrop" (click)="onSubmit(false)"></div>
+<mat-card>
+    <header>
+        <h2>Reports</h2>   
+        <button mat-icon-button color="primary" (click)="onSubmit(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <table mat-table [dataSource]="reports" class="reports" *ngIf="reports[0]">
+            <ng-container matColumnDef="sno">
+              <th mat-header-cell *matHeaderCellDef> S.No. </th>
+              <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+            </ng-container>
+            <ng-container matColumnDef="report_name">
+              <th mat-header-cell *matHeaderCellDef> Report Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.report_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="report_file">
+              <th mat-header-cell *matHeaderCellDef> Report </th>
+              <td mat-cell *matCellDef="let element"><a href="{{element.report_url}}" target="_blank">View</a></td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="operation">
+              <th mat-header-cell *matHeaderCellDef> Delete </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="deleteDocument(element.id)" aria-label="Example icon button with a menu icon">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container> -->
+            <tr mat-header-row *matHeaderRowDef="reportsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: reportsColumns;"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>

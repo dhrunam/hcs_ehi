@@ -4,6 +4,7 @@ import { Observable, of, take } from 'rxjs';
 import { EmployeeService } from 'src/app/dashboard/masters/employee/employee.service';
 import { HealthRecordService } from '../employee.service';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { PrintModule } from 'src/app/shared/methods/print';
 interface Employee{
   id:number;
   name:string;
@@ -45,6 +46,7 @@ export class AddComponent {
   // reportsColumns = ['sno','report_name','report_file','operation']
   reportsColumns = ['sno','report_name','report_file'];
   displayedColumns = ['sno','test_name','result','range'];
+  download_report = new PrintModule();
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
     this.getEmployees();
@@ -215,5 +217,8 @@ export class AddComponent {
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
     return this.employees.filter(employee => employee.name.toLowerCase().includes(filterValue));
+  }
+  downloadReport(){
+    this.download_report.downloadReport();
   }
 }
