@@ -27,4 +27,7 @@ export class HealthRecordService{
   add_remarks(fd: FormData){
     return this.http.patch(`${URL}/operation/health_profile_test/${fd.get('id')}`, fd);
   }
+  delete_report(id:number){
+    return this.http.delete(`${URL}/operation/health_test/upload/report/${id}`);
+  }
 }
