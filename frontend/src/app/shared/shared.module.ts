@@ -6,6 +6,7 @@ import { FormPromptComponent } from "./components/form-prompt/form-prompt.compon
 import { MedicalTestComponent } from "./components/form-prompt/medical-test/medical-test.component";
 import { SectionComponent } from "./components/form-prompt/section/section.component";
 import { FormsModule } from "@angular/forms";
+import { ReportsPromptComponent } from './components/reports-prompt/reports-prompt.component';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { FormsModule } from "@angular/forms";
       PromptComponent,
       FormPromptComponent,
       MedicalTestComponent,
-      SectionComponent
+      SectionComponent,
+      ReportsPromptComponent
     ],
     imports: [
       MaterialModule,
@@ -22,7 +24,7 @@ import { FormsModule } from "@angular/forms";
     exports: [
       ErrorAlertComponent,
       PromptComponent,
-      FormPromptComponent
+      ReportsPromptComponent,
     ]
 })
 export class SharedModule{}
