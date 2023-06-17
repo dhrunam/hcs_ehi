@@ -13,6 +13,17 @@ class EmpHealthProfileTestList(generics.ListCreateAPIView):
     #     self.request.data['created_by']= self.request.user.id
     #     instance=serializer.save()
     #     return instance
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        employee = self.request.guery_params.get('employee')
+        session =  self.request.guery_params.get('session')
+        if employee : 
+            queryset = queryset.filter(employee=employee)
+        
+        if session : 
+            queryset = queryset.filter(medical_test_session=session)
+            
+        return queryset
     
 
 class EmpHealthProfileTestDetails(generics.RetrieveUpdateDestroyAPIView):

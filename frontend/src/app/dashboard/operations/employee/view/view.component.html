@@ -1,1 +1,42 @@
-<p>view works!</p>
+<div class="container">
+    <form #firstForm="ngForm">
+        <section>
+          <div class="row">
+            <mat-form-field>
+              <input matInput [matDatepicker]="year_picker" hidden=true [readonly]="true">
+              <input matInput [ngModel]="selectedYear | date: 'YYYY'" name="year" #year="ngModel" placeholder="Select Year" required (click)="picker.open()" [readonly]="true">
+              <mat-datepicker-toggle matIconSuffix [for]="year_picker" ></mat-datepicker-toggle>
+              <mat-datepicker #year_picker startView="multi-year" (yearSelected)="chosenYearHandler($event)"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Session</mat-label>
+              <mat-select name="session" ngModel #session="ngModel" required (selectionChange)="getTests($event)">
+                <mat-option *ngFor="let s of sessions" [value]="s.id" >{{s.session}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label> Employee</mat-label>
+              <input type="text"
+                    matInput
+                    [matAutocomplete]="auto"
+                    (keyup)="onSearchEmployee(emp_key.value)"
+                    name="emp_key"
+                    [ngModel]="employee.name"
+                    #emp_key="ngModel"
+                    required>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let emp of filteredEmployees | async" [value]="emp.id" (click)="onSelectEmployee({id: emp.id, name: emp.name})">
+                  {{emp.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </section>
+    </form>
+    <div class="row">
+        <section class="preview">
+            <app-preview [details]="employee_details" [reports]="reports"></app-preview>
+          </section>
+    </div>
+
+</div>
