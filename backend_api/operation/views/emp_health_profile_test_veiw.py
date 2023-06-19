@@ -15,8 +15,8 @@ class EmpHealthProfileTestList(generics.ListCreateAPIView):
     #     return instance
     def get_queryset(self):
         queryset = super().get_queryset()
-        employee = self.request.guery_params.get('employee')
-        session =  self.request.guery_params.get('session')
+        employee = self.request.query_params.get('employee')
+        session =  self.request.query_params.get('session')
         if employee : 
             queryset = queryset.filter(employee=employee)
         

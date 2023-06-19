@@ -29,6 +29,7 @@ export interface EmployeeDetails{
 export class ViewComponent {
   @ViewChild('year_picker', { static: false }) picker!: MatDatepicker<Date>;
   selectedYear: string = '';
+  session_id:number = 0;
   sessions: Array<any> = [];
   tests: Array<any> = [];
   test_details: Array<any> = [];
@@ -38,6 +39,7 @@ export class ViewComponent {
   date!: Date;
   employee_details!: EmployeeDetails;
   reports: Array<any> = [];
+  employee_test_details: Array<any>=[];
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
 
   ngOnInit(): void{
@@ -71,6 +73,7 @@ export class ViewComponent {
   getTests(id: any){
     this.tests = [];
     this.tests = this.sessions.find(session => session.id === id.value).related_profiles;
+    this.session_id=id.value;
   }
 
   onSearchEmployee(key:string){
@@ -89,9 +92,12 @@ export class ViewComponent {
   }
 
   getDocuments(id:number){
-    this.healthRecordService.get_reports(id).subscribe({
+    this.healthRecordService.get_reports_by_session(id,this.session_id).subscribe({
       next: data => {
+        data= data.results[0]
+        console.log('Data:')
         console.log(data);
+        this.employee_test_details=data.related_emp_health_test_details;
         let collection_date = new Date(data.collection_date);
         let registration_date = new Date(data.reg_date);
         this.reports = data.related_emp_health_tests_reports
@@ -108,20 +114,31 @@ export class ViewComponent {
           test_details:data.related_emp_health_test_details
         }
 
+        console.log('Employee First Details:')
         console.log(this.employee_details)
-        this.setTestDetails(data.related_emp_health_test_details);
+        this.setTestDetails(data.id);
       }
     })
   }
 
-  setTestDetails(data:any){
+  setTestDetails(test_profile_id:number){
    
       this.tests.forEach(d => {
+        console.log('ForEachData:');
+        console.log(d);
         d.related_test_profile.related_tests.forEach((e:any) => {
           const found = this.test_details.some(t => t.profile_id === e.profile);
+          let test_details_index = this.employee_test_details.findIndex(i=>i.id===e.id);
           if(found){
             let index = this.test_details.findIndex(t => t.profile_id === e.profile);
-            this.test_details[index].test_details.push({ id: e.id, name: e.name, value:0, normal_min_value: e.normal_min_value,normal_max_value: e.normal_max_value,unit: e.unit,});
+           
+            this.test_details[index].test_details.push({ 
+              id: e.id, name: e.name, 
+              value:  parseFloat( this.employee_test_details[test_details_index].medical_test_result),
+              normal_min_value: parseFloat(e.normal_min_value),
+              normal_max_value: parseFloat(e.normal_max_value),
+              unit: e.unit,
+            });
           }
           else{
             this.test_details.push({
@@ -131,9 +148,9 @@ export class ViewComponent {
                 {
                   id: e.id,
                   name:e.name,
-                  value: 0,
-                  normal_min_value: e.normal_min_value,
-                  normal_max_value: e.normal_max_value,
+                  value:  parseFloat( this.employee_test_details[test_details_index].medical_test_result),
+                  normal_min_value: parseFloat(e.normal_min_value),
+                  normal_max_value: parseFloat(e.normal_max_value),
                   unit: e.unit,
                 }
               ]
@@ -141,11 +158,12 @@ export class ViewComponent {
           }
         })
       })
-      console.log("Test Details:");
-      console.log(this.test_details);
-      console.log("Employee Details:");
-      console.log(this.employee_details);
+
       this.employee_details.test_details = this.test_details;
+
+     
     
   }
+
+
 }
