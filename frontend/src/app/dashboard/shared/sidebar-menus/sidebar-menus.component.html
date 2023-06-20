@@ -96,17 +96,23 @@
     <li class="menu-item">
         <div class="icon-links" (click)="onSubMenuToggle(elem5,elem6,'operations')">
             <mat-label>
-                <mat-icon>health_and_safety</mat-icon>
-                <span>Health Record</span>
+                <mat-icon>record_voice_over</mat-icon>
+                <span>Record Test</span>
             </mat-label>
             <div class="icon" #elem5 [ngClass]="{'active': toggleKey === 'operations', '': toggleKey !== 'operations' && toggle}">
                 <mat-icon>chevron_right</mat-icon>
             </div>
         </div>
         <ul class="sub-menu" #elem6 [ngClass]="{'active': toggleKey === 'operations', '': toggleKey !== 'operations' && toggle}">
+            <li class="sub-menu-item" routerLink="/dashboard/operations/health-record/view" routerLinkActive="active" (click)="onToggleKey('operations')">
+                <label>
+                    <mat-icon>visibility</mat-icon>
+                    <span>View</span>
+                </label>
+            </li>
             <li class="sub-menu-item" routerLink="/dashboard/operations/health-record/add" routerLinkActive="active" (click)="onToggleKey('operations')">
                 <label>
-                    <mat-icon>medication_liquid</mat-icon>
+                    <mat-icon>add</mat-icon>
                     <span>Add</span>
                 </label>
             </li>

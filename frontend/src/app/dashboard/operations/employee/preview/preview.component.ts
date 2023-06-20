@@ -12,7 +12,7 @@ import { promptAnimation } from 'src/app/shared/animations/prompt.animation';
 })
 
 export class PreviewComponent {
-  displayedColumns = ['sno','test_name','results','range'];
+  displayedColumns = ['sno','test_name','results','indicator','range'];
   showPrompt: boolean = false;
   @Input() details?: EmployeeDetails;
   @Input() reports: Array<any> = [];

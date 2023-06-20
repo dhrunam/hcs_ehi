@@ -18,11 +18,17 @@ export class HealthRecordService{
   save_test_details(fd: FormData){
     return this.http.post(`${URL}/operation/health_test`, fd);
   }
+  get_test_details(id: number){
+    return this.http.get<any>(`${URL}/operation/health_test?test_id=${id}`);
+  }
   upload_reports(fd: FormData){
     return this.http.post(`${URL}/operation/health_test/upload/report`,fd);
   }
   get_reports(id: number){
     return this.http.get<any>(`${URL}/operation/health_profile_test/${id}`);
+  }
+  get_reports_by_session(emp: number, session: number){
+    return this.http.get<any>(`${URL}/operation/health_profile_test?employee=${emp} & session=${session}`);
   }
   add_remarks(fd: FormData){
     return this.http.patch(`${URL}/operation/health_profile_test/${fd.get('id')}`, fd);
