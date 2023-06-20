@@ -28,7 +28,7 @@ export class HealthRecordService{
     return this.http.get<any>(`${URL}/operation/health_profile_test/${id}`);
   }
   get_reports_by_session(emp: number, session: number){
-    return this.http.get<any>(`${URL}/operation/health_profile_test?employee=${emp} & session=${session}`);
+    return this.http.get<any>(`${URL}/operation/health_profile_test`, { params: { employee: emp, session: session}});
   }
   add_remarks(fd: FormData){
     return this.http.patch(`${URL}/operation/health_profile_test/${fd.get('id')}`, fd);

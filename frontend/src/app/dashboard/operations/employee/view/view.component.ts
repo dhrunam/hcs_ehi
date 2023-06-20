@@ -65,14 +65,13 @@ export class ViewComponent {
     this.healthRecordService.get_sessions(year).subscribe({
       next: data => { 
         this.sessions = data.results;
-
       },
     })
   }
 
   getTests(id: any){
     this.tests = [];
-    this.tests = this.sessions.find(session => session.id === id.value).related_profiles;
+    this.tests.push(...this.sessions.find(session => session.id === id.value).related_profiles);
     this.session_id=id.value;
   }
 
@@ -82,8 +81,6 @@ export class ViewComponent {
   onSelectEmployee(employee: Employee){
     this.employee = employee;
     this.getDocuments(this.employee.id);
-   
-
   }
 
   private _filter(value: string): any[] {
@@ -94,13 +91,11 @@ export class ViewComponent {
   getDocuments(id:number){
     this.healthRecordService.get_reports_by_session(id,this.session_id).subscribe({
       next: data => {
-        data= data.results[0]
-        console.log('Data:')
-        console.log(data);
-        this.employee_test_details=data.related_emp_health_test_details;
+        data= data.results[0];
+        this.employee_test_details = data.related_emp_health_test_details;
         let collection_date = new Date(data.collection_date);
         let registration_date = new Date(data.reg_date);
-        this.reports = data.related_emp_health_tests_reports
+        this.reports = data.related_emp_health_tests_reports;
         this.employee_details = {
           name: this.employees.find(e => e.id === this.employee.id).name,
           year: data.related_medical_test_session.year,
@@ -111,59 +106,88 @@ export class ViewComponent {
           analyst: data.analyst,
           sample_type: data.sample_type,
           medical_test_session: data.related_medical_test_session.session,
-          test_details:data.related_emp_health_test_details
+          patient_remarks: data.emp_remarks,
         }
-
-        console.log('Employee First Details:')
-        console.log(this.employee_details)
-        this.setTestDetails(data.id);
+        this.setTestDetails(data.related_medical_test_session);
+        // console.log('Employee First Details:')
+        // console.log(this.employee_details)
+        // this.setTestDetails(data.id);
       }
     })
   }
 
-  setTestDetails(test_profile_id:number){
-   
-      this.tests.forEach(d => {
-        console.log('ForEachData:');
-        console.log(d);
-        d.related_test_profile.related_tests.forEach((e:any) => {
-          const found = this.test_details.some(t => t.profile_id === e.profile);
-          let test_details_index = this.employee_test_details.findIndex(i=>i.id===e.id);
-          if(found){
-            let index = this.test_details.findIndex(t => t.profile_id === e.profile);
-           
-            this.test_details[index].test_details.push({ 
-              id: e.id, name: e.name, 
-              value:  parseFloat( this.employee_test_details[test_details_index].medical_test_result),
-              normal_min_value: parseFloat(e.normal_min_value),
-              normal_max_value: parseFloat(e.normal_max_value),
-              unit: e.unit,
-            });
-          }
-          else{
-            this.test_details.push({
-              profile_name: this.tests.find(t => t.medical_test_profile === e.profile).related_test_profile.name,
-              profile_id: e.profile,
-              test_details: [
-                {
-                  id: e.id,
-                  name:e.name,
-                  value:  parseFloat( this.employee_test_details[test_details_index].medical_test_result),
-                  normal_min_value: parseFloat(e.normal_min_value),
-                  normal_max_value: parseFloat(e.normal_max_value),
-                  unit: e.unit,
-                }
-              ]
-            })
-          }
-        })
+  // setTestDetails(test_profile_id:number){
+  //     this.tests.forEach(d => {
+  //       d.related_test_profile.related_tests.forEach((e:any) => {
+  //         console.log(e);
+  //         const found = this.test_details.some(t => t.profile_id === e.profile);
+  //         let test_details_index = this.employee_test_details.findIndex(i=>i.id===e.id);
+  //         if(found){
+  //           let index = this.test_details.findIndex(t => t.profile_id === e.profile);
+  //           this.test_details[index].test_details.push({ 
+  //             id: e.id,
+  //             name: e.name, 
+  //             value:  parseFloat(this.employee_test_details[test_details_index].medical_test_result),
+  //             normal_min_value: parseFloat(e.normal_min_value),
+  //             normal_max_value: parseFloat(e.normal_max_value),
+  //             unit: e.unit,
+  //           });
+  //         }
+  //         else{
+  //           console.log(this.employee_test_details, this.employee_test_details[test_details_index]);
+  //           this.test_details.push({
+  //             profile_name: this.tests.find(t => t.medical_test_profile === e.profile).related_test_profile.name,
+  //             profile_id: e.profile,
+  //             test_details: [
+  //               {
+  //                 id: e.id,
+  //                 name:e.name,
+  //                 value:  parseFloat(this.employee_test_details[test_details_index].medical_test_result),
+  //                 normal_min_value: parseFloat(e.normal_min_value),
+  //                 normal_max_value: parseFloat(e.normal_max_value),
+  //                 unit: e.unit,
+  //               }
+  //             ]
+  //           })
+  //         }
+  //       })
+  //     })
+  //     this.employee_details.test_details = this.test_details;
+  // }
+  setTestDetails(tests: any){
+    tests.related_profiles.forEach((d:any) => {
+      d.related_test_profile.related_tests.forEach((e:any) => {
+        const found = this.test_details.some(t => t.profile_id === e.profile);
+        let test_details_index = this.employee_test_details.findIndex(i=>i.medical_test_profile===e.profile);
+        if(found){
+          let index = this.test_details.findIndex(t => t.profile_id === e.profile);
+          this.test_details[index].test_details.push({ 
+            id: e.id,
+            name: e.name, 
+            value:  parseFloat(this.employee_test_details[test_details_index].medical_test_result),
+            normal_min_value: parseFloat(e.normal_min_value),
+            normal_max_value: parseFloat(e.normal_max_value),
+            unit: e.unit,
+          });
+        }
+        else{
+          this.test_details.push({
+            profile_name: this.tests.find(t => t.medical_test_profile === e.profile).related_test_profile.name,
+            profile_id: e.profile,
+            test_details: [
+              {
+                id: e.id,
+                name:e.name,
+                value:  parseFloat(this.employee_test_details[test_details_index].medical_test_result),
+                normal_min_value: parseFloat(e.normal_min_value),
+                normal_max_value: parseFloat(e.normal_max_value),
+                unit: e.unit,
+              }
+            ]
+          })
+        }
       })
-
-      this.employee_details.test_details = this.test_details;
-
-     
-    
+    })
+    this.employee_details.test_details = this.test_details;
   }
-
-
 }
