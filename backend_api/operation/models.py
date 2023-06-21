@@ -25,6 +25,9 @@ class EmpHealthProfileTest(models.Model):
     created_by= models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     created_at= models.DateTimeField(auto_created=True, auto_now=True)
     
+    class Meta:
+         unique_together = ('employee','medical_test_session')
+    
 # def get_report_upload_path(instance, filename):
 #     # Generate the dynamic path based on the instance and filename
 #     # For example, you can use the instance's ID and the original filename
@@ -41,6 +44,9 @@ class  EmpHealthTestDetails(models.Model):
     normal_min_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
     normal_max_value=models.DecimalField(max_digits=10, decimal_places=2, default=0)
     unit = models.CharField(max_length=10, blank=True, default='')
+
+    class Meta:
+         unique_together = ("emp_health_profile_test","medical_test_profile", "medical_test")
 
 class EmpHealthTestReports(models.Model):
         emp_health_profile_test=models.ForeignKey(EmpHealthProfileTest,null=False, on_delete=models.CASCADE, related_name='emp_health_test_report')

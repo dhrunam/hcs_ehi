@@ -109,6 +109,8 @@ export class ViewComponent {
           patient_remarks: data.emp_remarks,
         }
         this.setTestDetails(data.related_medical_test_session);
+        // console.log("Medical Test Session:");
+        // console.log(data.related_medical_test_session);
         // console.log('Employee First Details:')
         // console.log(this.employee_details)
         // this.setTestDetails(data.id);
@@ -155,10 +157,18 @@ export class ViewComponent {
   //     this.employee_details.test_details = this.test_details;
   // }
   setTestDetails(tests: any){
+    // console.log('employee_test_details:')
+    // console.log(this.employee_test_details)
     tests.related_profiles.forEach((d:any) => {
+      console.log("d:")
+      console.log(d)
       d.related_test_profile.related_tests.forEach((e:any) => {
+        console.log("e:")
+        console.log(e)
         const found = this.test_details.some(t => t.profile_id === e.profile);
-        let test_details_index = this.employee_test_details.findIndex(i=>i.medical_test_profile===e.profile);
+        let test_details_index = this.employee_test_details.findIndex(i=>i.medical_test===e.id);
+        // console.log("test_details_index:");
+        // console.log(test_details_index);
         if(found){
           let index = this.test_details.findIndex(t => t.profile_id === e.profile);
           this.test_details[index].test_details.push({ 

@@ -15,6 +15,8 @@ class EmpHealthTestDetailsList(generics.ListCreateAPIView):
             queryset.filter(emp_health_profile_test=emp_health_profile_test_id)
         
         return queryset
+    
+    
     @transaction.atomic()
     def post(self, request, *args, **kwargs):
         request.data._mutable = True
