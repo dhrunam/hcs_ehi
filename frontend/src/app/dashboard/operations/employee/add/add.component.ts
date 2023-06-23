@@ -12,7 +12,7 @@ interface Employee{
 export interface EmployeeDetails{
   name: string;
   year: string;
-  collection_date: string;
+  collection_date: string ;
   registration_date: string;
   location: string;
   analyst: string;
@@ -21,6 +21,8 @@ export interface EmployeeDetails{
   sample_type:string;
   test_details?: Array<any>;
   patient_remarks?: string;
+  health_profile_test_id: number;
+  related_emp_health_test_details?: Array<any>;
 }
 @Component({
   selector: 'app-add',
@@ -36,6 +38,7 @@ export class AddComponent {
   tests: Array<any> = [];
   test_details: Array<any> = [];
   sessions: Array<any> = [];
+  session : number= 0;
   employee_details!: EmployeeDetails;
   employee: Employee = { id: 0, name: ''};
   employees: Array<any> = [];
@@ -47,10 +50,32 @@ export class AddComponent {
   reportsColumns = ['sno','report_name','report_file'];
   displayedColumns = ['sno','test_name','result','range'];
   download_report = new PrintModule();
+  startDate = new Date(2019, 0, 1);
   constructor(private employeeService: EmployeeService, private healthRecordService: HealthRecordService){}
   ngOnInit(): void{
+    this.initializeEmployeeDetails();
     this.getEmployees();
     this.date = new Date();
+   
+  }
+
+  initializeEmployeeDetails()
+  {
+    this.employee_details={
+      name: "",
+      year: '',
+      collection_date: "" ,
+      registration_date: "",
+      location: '',
+      analyst: '',
+      ref_doctor: '',
+      medical_test_session: '',
+      sample_type: '',
+      test_details:[],
+      patient_remarks: '',
+      health_profile_test_id: 0,
+      related_emp_health_test_details: [],
+    };
   }
   chosenYearHandler(ev:any){
     let { _d } = ev;
@@ -76,12 +101,17 @@ export class AddComponent {
   getTests(id: any){
     this.tests = [];
     this.tests = this.sessions.find(session => session.id === id.value).related_profiles;
+    console.log('Test:',this.tests);
+    this.session = id.value;
+    // this.getHealthTestProfile();
   }
   onSearchEmployee(key:string){
     key.length >=2 ? this.filteredEmployees = of(this._filter(key)) : this.filteredEmployees = of([]);
+   
   }
   onSelectEmployee(employee: Employee){
     this.employee = employee;
+    this.getHealthTestProfile();
   }
   onSaveDraft(data: NgForm){
     if(!data.valid){
@@ -100,6 +130,7 @@ export class AddComponent {
       fd.append('ref_doctor', data.value.ref_doctor);
       fd.append('medical_test_session', data.value.session);
       fd.append('sample_type', data.value.sample_type);
+      fd.append('id', this.employee_details.health_profile_test_id.toString());
       if(this.draftMode){
         fd.append('id', this.health_record_id.toString());
         observable = this.healthRecordService.update_draft(fd);
@@ -109,31 +140,40 @@ export class AddComponent {
       }
       observable.pipe(take(1)).subscribe({
         next: response => {
+          
           this.draftMode = true;
           this.health_record_id = response.id;
           this.employee_details = {
             name: this.employees.find(e => e.id === this.employee.id).name,
             year: data.value.year,
-            collection_date: `${collection_date.getDate() < 10 ? '0':''}${collection_date.getDate()}-${collection_date.getMonth() + 1 < 10 ? '0':''}${collection_date.getMonth()+1}-${collection_date.getFullYear()}`,
-            registration_date: `${registration_date.getDate() < 10 ? '0':''}${registration_date.getDate()}-${registration_date.getMonth() + 1 < 10 ? '0':''}${registration_date.getMonth()+1}-${registration_date.getFullYear()}`,
+            collection_date: response.collection_date,
+            registration_date: response.reg_date,
             location: data.value.location,
             ref_doctor: data.value.ref_doctor,
             analyst: data.value.analyst,
             sample_type: data.value.sample_type,
             medical_test_session: this.sessions.find(s => s.id === data.value.session).session,
+            health_profile_test_id: response.id,
+            patient_remarks :response.emp_remarks,
           }
         }
       })
     }
   }
   addTestDetails(data: NgForm){
+    this.test_details=[];
+    
     if(!data.valid){
+      
       data.control.markAllAsTouched();
     }
     else{
+      
       this.tests.forEach(d => {
         d.related_test_profile.related_tests.forEach((e:any) => {
+          
           const found = this.test_details.some(t => t.profile_id === e.profile);
+
           if(found){
             let index = this.test_details.findIndex(t => t.profile_id === e.profile);
             this.test_details[index].test_details.push({ id: e.id, name: e.name, value: data.value[`${e.id}`], normal_min_value: e.normal_min_value,normal_max_value: e.normal_max_value,unit: e.unit,});
@@ -220,5 +260,53 @@ export class AddComponent {
   }
   downloadReport(){
     this.download_report.downloadReport();
+  }
+
+  getHealthTestProfile(){
+    this.healthRecordService.get_reports_by_session(this.employee.id,this.session).subscribe({
+      next: data => {
+        data= data.results[0];
+      
+        this.reports = data.related_emp_health_tests_reports;
+        this.employee_details = {
+          name: this.employees.find(e => e.id === this.employee.id).name,
+          year: data.related_medical_test_session.year,
+          collection_date: data.collection_date,
+          registration_date: data.reg_date,
+          location: data.location,
+          ref_doctor: data.ref_doctor,
+          analyst: data.analyst,
+          sample_type: data.sample_type,
+          medical_test_session: data.related_medical_test_session.session,
+          patient_remarks: data.emp_remarks,
+          health_profile_test_id : data.id,
+          related_emp_health_test_details : data.related_emp_health_test_details,
+        }
+        this.reports = data.related_emp_health_tests_reports;
+        this.setTestDetails();
+       
+      }
+    })
+  }
+  setTestDetails(){
+    
+    this.tests.forEach((d:any) => {
+      
+      d.related_test_profile.related_tests.forEach((e:any) => {
+        
+       
+        const found = this.test_details.some(t => t.profile_id === e.profile);
+       
+        let test_details_index = this.employee_details.related_emp_health_test_details?.findIndex(i=>i.medical_test===e.id);
+        e.medical_test_result = test_details_index !=undefined && test_details_index > 0 ? parseFloat( this.employee_details.related_emp_health_test_details?.[test_details_index].medical_test_result) : 0;
+       
+
+     
+      })
+
+      
+    })
+   
+    
   }
 }

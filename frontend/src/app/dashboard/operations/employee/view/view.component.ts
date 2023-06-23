@@ -20,11 +20,12 @@ export interface EmployeeDetails{
   sample_type:string;
   test_details?: Array<any>;
   patient_remarks?: string;
+  health_profile_test_id: number;
 }
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  styleUrls: ['./view.component.css'],
 })
 export class ViewComponent {
   @ViewChild('year_picker', { static: false }) picker!: MatDatepicker<Date>;
@@ -107,6 +108,7 @@ export class ViewComponent {
           sample_type: data.sample_type,
           medical_test_session: data.related_medical_test_session.session,
           patient_remarks: data.emp_remarks,
+          health_profile_test_id: data.id
         }
         this.setTestDetails(data.related_medical_test_session);
         // console.log("Medical Test Session:");
@@ -118,44 +120,7 @@ export class ViewComponent {
     })
   }
 
-  // setTestDetails(test_profile_id:number){
-  //     this.tests.forEach(d => {
-  //       d.related_test_profile.related_tests.forEach((e:any) => {
-  //         console.log(e);
-  //         const found = this.test_details.some(t => t.profile_id === e.profile);
-  //         let test_details_index = this.employee_test_details.findIndex(i=>i.id===e.id);
-  //         if(found){
-  //           let index = this.test_details.findIndex(t => t.profile_id === e.profile);
-  //           this.test_details[index].test_details.push({ 
-  //             id: e.id,
-  //             name: e.name, 
-  //             value:  parseFloat(this.employee_test_details[test_details_index].medical_test_result),
-  //             normal_min_value: parseFloat(e.normal_min_value),
-  //             normal_max_value: parseFloat(e.normal_max_value),
-  //             unit: e.unit,
-  //           });
-  //         }
-  //         else{
-  //           console.log(this.employee_test_details, this.employee_test_details[test_details_index]);
-  //           this.test_details.push({
-  //             profile_name: this.tests.find(t => t.medical_test_profile === e.profile).related_test_profile.name,
-  //             profile_id: e.profile,
-  //             test_details: [
-  //               {
-  //                 id: e.id,
-  //                 name:e.name,
-  //                 value:  parseFloat(this.employee_test_details[test_details_index].medical_test_result),
-  //                 normal_min_value: parseFloat(e.normal_min_value),
-  //                 normal_max_value: parseFloat(e.normal_max_value),
-  //                 unit: e.unit,
-  //               }
-  //             ]
-  //           })
-  //         }
-  //       })
-  //     })
-  //     this.employee_details.test_details = this.test_details;
-  // }
+
   setTestDetails(tests: any){
     // console.log('employee_test_details:')
     // console.log(this.employee_test_details)
@@ -194,7 +159,10 @@ export class ViewComponent {
                 unit: e.unit,
               }
             ]
+           
           })
+
+        
         }
       })
     })
