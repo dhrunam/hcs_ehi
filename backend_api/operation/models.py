@@ -11,6 +11,7 @@ import datetime
 # Create your models here.
 
 class EmpHealthProfileTest(models.Model):
+    
     employee=models.ForeignKey(master_models.Employee, null=True, on_delete=models.SET_NULL, related_name='emp_health_profile_test')
     emp_age= models.IntegerField(default=0)
     emp_remarks = models.CharField(max_length=512, null= True, default='')

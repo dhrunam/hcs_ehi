@@ -3,7 +3,9 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 export class PrintModule{
-    async downloadReport(){
+    async downloadReport(data:any){
+
+      console.log('Employee Details:', data);
         let docDefinition:any = {
             pageSize: 'A4',
             pageOrientation: 'portrait',
@@ -72,6 +74,7 @@ export class PrintModule{
                 },
             ]
         };
+
         pdfMake.createPdf(docDefinition).open();
     }
 }

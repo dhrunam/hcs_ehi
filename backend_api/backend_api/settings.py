@@ -152,6 +152,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL= 'api/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+FILE_UPLOAD_PATHS={
+    "report":"report/",
+}
+
 REST_FRAMEWORK = {
 #     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
     'DEFAULT_RENDERER_CLASSES': (
@@ -180,3 +184,4 @@ REST_DURIN = {
         "API_ACCESS_EXCLUDE_FROM_SESSIONS": False,
         "API_ACCESS_RESPONSE_INCLUDE_TOKEN": False,
 }
+

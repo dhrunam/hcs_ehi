@@ -18,7 +18,7 @@ class EmpHealthProfileTestList(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
 
         print(request.data)
-        
+        request.data._mutable=True
         if(int(request.data['id']) <= 0):
             print('Insert:')
             request.data['created_by']= request.user.id
@@ -27,7 +27,7 @@ class EmpHealthProfileTestList(generics.ListCreateAPIView):
         else:
             print('Update:')
             result = self._update(request, *args, **kwargs)
-
+        request.data._mutable=False
         return result
 
     def get_queryset(self):

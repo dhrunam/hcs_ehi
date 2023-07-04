@@ -259,7 +259,7 @@ export class AddComponent {
     return this.employees.filter(employee => employee.name.toLowerCase().includes(filterValue));
   }
   downloadReport(){
-    this.download_report.downloadReport();
+    this.download_report.downloadReport(this.employee_details);
   }
 
   getHealthTestProfile(){
