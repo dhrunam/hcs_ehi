@@ -71,6 +71,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'related_designation',
                     'related_organisation',
                     'type',
+                    'gender',
                      )
 
 class SectionSerializer(serializers.ModelSerializer):

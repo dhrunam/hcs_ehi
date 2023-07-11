@@ -48,7 +48,7 @@ class Employee(models.Model):
     designation = models.ForeignKey(Designation, null=True, on_delete= models.SET_NULL, related_name='employee')
     organisation = models.ForeignKey(Organisation, null=True, on_delete=models.SET_NULL, related_name='employee')
     name =  models.CharField(max_length=128, null=False)
-    blood_group = models.CharField(max_length=6, null=False)
+    blood_group = models.CharField(max_length=6, null=True, default='')
     residenntial_address = models.CharField(max_length=1028, null= True, default='')
     date_of_birth = models.DateField(auto_created=False, auto_now= False)
     date_of_joining = models.DateField(auto_created=False, auto_now=False)
