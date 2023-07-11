@@ -1,1 +1,0 @@
-from account.views.user_registration_view import *

@@ -1,1 +1,0 @@
-from .medical_tests_conf_view import *
