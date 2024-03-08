@@ -10,6 +10,9 @@ urlpatterns = [
 
     path('operation/health_test/upload/report', op_views.EmpHealthTestReportsList.as_view()),
     # path('operation/health_test/upload/report/<int:pk>', op_views.EmpHealthTestReportsDetails.as_view()),
-    
+
+    path('operation/health_test/sessionwise/emp/list', op_views.SessionwiseEmplistOfMedicalTestRecorded.as_view()),
+    path('operation/health_test/present_session/test/summary', op_views.SingleSessionWiseSummary.as_view()),
+    path('operation/health_test/sessionwise/test/summary', op_views.SessionWiseSummary.as_view()),
     
 ]
